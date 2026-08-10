@@ -7,10 +7,11 @@
 1. `AGENTS.md`.
 2. `docs/PROJECT_POLICY.md`.
 3. `docs/PROJECT_CONTEXT.md`.
-4. `docs/STATUS.md`.
-5. `docs/decisions/`.
-6. Последний подходящий session log.
-7. `docs/GIT_POLICY.md` и `docs/RECOVERY.md`.
+4. `docs/INTEGRATIONS.md`.
+5. `docs/STATUS.md`.
+6. `docs/decisions/`.
+7. Последний подходящий session log.
+8. `docs/GIT_POLICY.md` и `docs/RECOVERY.md`.
 
 Проверь Git status, текущую ветку, последний commit и `origin`, если Git настроен.
 
@@ -22,6 +23,7 @@
 - важные решения;
 - риски и блокеры;
 - незавершённые задачи;
+- состояние обязательных Skills, плагинов и MCP, включая отсутствующую авторизацию;
 - первый безопасный следующий шаг.
 
 Не редактируй файлы и не запускай внешние действия до завершения реконструкции.

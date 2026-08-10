@@ -2,4 +2,4 @@
 
 Канонические правила проекта находятся в `AGENTS.md`. Прочитай и выполняй их полностью.
 
-Перед работой также прочитай `docs/PROJECT_POLICY.md`, `docs/PROJECT_CONTEXT.md` и `docs/STATUS.md`. Не используй историю чата как единственную память проекта.
+Перед работой также прочитай `docs/PROJECT_POLICY.md`, `docs/PROJECT_CONTEXT.md`, при необходимости `docs/INTEGRATIONS.md`, и `docs/STATUS.md`. Не используй историю чата как единственную память проекта.

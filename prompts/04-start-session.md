@@ -7,10 +7,11 @@
 1. `AGENTS.md`.
 2. `docs/PROJECT_POLICY.md`.
 3. `docs/PROJECT_CONTEXT.md`.
-4. `docs/STATUS.md`.
-5. Актуальные решения.
-6. Последний подходящий session log.
-7. Git status, если Git настроен.
+4. `docs/INTEGRATIONS.md`, если задача зависит от расширений.
+5. `docs/STATUS.md`.
+6. Актуальные решения.
+7. Последний подходящий session log.
+8. Git status, если Git настроен.
 
 Ответь кратко:
 
