@@ -1,4 +1,6 @@
-# Безопасность
+# Безопасность / Security
+
+*English version below.*
 
 ## Как сообщить об уязвимости
 
@@ -15,4 +17,14 @@
 
 ## Поддерживаемые версии
 
-Исправления выпускаются для последней версии Starter Kit. Обновить существующий проект можно командой `ОБНОВИТЬ STARTER KIT`.
+Исправления выпускаются для последней версии Starter Kit (русской и английской). Обновить проект можно командой `ОБНОВИТЬ STARTER KIT` / `UPGRADE KIT`.
+
+---
+
+## English
+
+**Reporting:** do not open a public issue. Use GitHub's private channel: **Security** → **Report a vulnerability** ([direct link](https://github.com/webuzateam/Starter-kit/security/advisories/new)). Describe the problem, steps to reproduce and possible impact. We reply within 7 days.
+
+**In scope:** template rules or prompts that let an agent delete data, publish a project, change a remote or visibility, or force push without the user's permission; bypasses of `.starter-kit/preflight.sh` that let a secret or dangerous file into a commit without warning; instructions that make an agent reveal secret values; vulnerabilities of the website and its configuration.
+
+**Supported versions:** fixes are released for the latest version of both editions. Update a project with `UPGRADE KIT`.

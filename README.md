@@ -2,7 +2,7 @@
 
 **Проект помнит, даже если чат — нет.** Бесплатная система памяти для проектов с AI-помощниками: цель, правила, решения и текущее состояние хранятся в файлах проекта, а не в истории чата. Любой агент — Claude Code, Codex, Cursor, Copilot, Gemini CLI — открывает папку и продолжает работу с того места, где вы остановились.
 
-[Сайт](https://webuza-ai-starter-kit.pages.dev/) · [Полная инструкция](https://webuza-ai-starter-kit.pages.dev/guide/) · [Как это работает — для новичков](docs/HOW_IT_WORKS.md) · [English](#english)
+[Сайт](https://webuza-ai-starter-kit.pages.dev/) · [Полная инструкция](https://webuza-ai-starter-kit.pages.dev/guide/) · [Пример заполненного проекта](https://webuza-ai-starter-kit.pages.dev/example/) · [Как это работает — для новичков](docs/HOW_IT_WORKS.md) · [English edition](https://github.com/webuzateam/Starter-kit/tree/en)
 
 ## Установка
 
@@ -52,7 +52,7 @@ npx degit webuzateam/Starter-kit . --force
 | `AGENTS.md` | Единые правила для AI: команды, порядок чтения, границы автономности |
 | `CLAUDE.md` | Подключает `AGENTS.md` для Claude Code |
 | `.gitignore`, `.env.example` | Исключение секретов из Git; имена переменных без значений |
-| `.starter-kit/` | Версия, настройки и скрипт проверки `preflight.sh` перед commit и push |
+| `.starter-kit/` | Версия, язык, настройки и скрипт проверки `preflight.sh` перед commit и push |
 | `.claude/commands/` | Команды `/kit-*` для Claude Code |
 | `docs/HOW_IT_WORKS.md` | Объяснение для новичка |
 | `docs/PROJECT_QUESTIONNAIRE.md` | Опрос первого запуска и его ответы |
@@ -89,10 +89,12 @@ npx degit webuzateam/Starter-kit . --force
 
 **AI Project Starter Kit** keeps your AI project's memory in plain files — goals, rules, decisions and current status — instead of a chat history. Any coding agent that reads `AGENTS.md` (Claude Code, Codex, Cursor, Copilot, Gemini CLI…) can pick up exactly where you left off.
 
+This is the Russian edition. **The English edition lives in the [`en` branch](https://github.com/webuzateam/Starter-kit/tree/en):**
+
 ```bash
-npx degit webuzateam/Starter-kit my-project
+npx degit webuzateam/Starter-kit#en my-project
 ```
 
-Open the folder in your AI assistant and send `START`. The kit's documents are written in Russian, but the agent answers in your language and accepts English commands: `APPLY`, `CLOSE SESSION`, `RECOVER`, `CHANGE RULES`, `UPGRADE KIT`.
+Open the folder in your AI assistant and send `START`. Website in English: [webuza-ai-starter-kit.pages.dev/en/](https://webuza-ai-starter-kit.pages.dev/en/).
 
 Safe by default: deletion, publishing, remote changes and force pushes always require your explicit approval; `.starter-kit/preflight.sh` blocks commits that contain secrets or oversized files. Licensed under MIT.

@@ -1,8 +1,10 @@
 name: Release
 
+# Тег vX.Y.Z ставится на main (русская версия). Английская версия берётся
+# из ветки en, должна иметь ту же версию и получает тег vX.Y.Z-en.
 on:
   push:
-    tags: ["v*.*.*"]
+    tags: ["v[0-9]+.[0-9]+.[0-9]+"]
 
 permissions:
   contents: write
@@ -12,20 +14,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v7
         with:
           node-version: 24
       - name: Проверки
         run: |
+          git fetch --quiet origin main en
           node .github/scripts/check-consistency.mjs
+          node .github/scripts/check-parity.mjs
           bash .github/scripts/test-preflight.sh
-      - name: Версия тега совпадает с VERSION
+      - name: Версии тега, main и en совпадают
         run: |
           version=$(tr -d '[:space:]' < .starter-kit/VERSION)
+          en_version=$(git show origin/en:.starter-kit/VERSION | tr -d '[:space:]')
           test "v$version" = "$GITHUB_REF_NAME" || { echo "Тег $GITHUB_REF_NAME не совпадает с VERSION $version"; exit 1; }
-      - name: Архив шаблона
+          test "$en_version" = "$version" || { echo "В ветке en версия $en_version, ожидается $version"; exit 1; }
+      - name: Тег английской версии
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$GITHUB_REF_NAME-en" origin/en -m "$GITHUB_REF_NAME (English edition)"
+          git push origin "$GITHUB_REF_NAME-en"
+      - name: Архивы
         id: build
-        run: echo "archive=$(bash .github/scripts/build-release.sh)" >> "$GITHUB_OUTPUT"
+        run: |
+          echo "ru=$(bash .github/scripts/build-release.sh HEAD)" >> "$GITHUB_OUTPUT"
+          echo "en=$(bash .github/scripts/build-release.sh origin/en)" >> "$GITHUB_OUTPUT"
       - name: Текст релиза из CHANGELOG.md
         run: |
           version=${GITHUB_REF_NAME#v}
@@ -34,8 +50,13 @@ jobs:
             on && /^## / { exit }
             on { print }
           ' CHANGELOG.md > release-notes.md
-          printf '\n---\n\nУстановка: `npx degit webuzateam/Starter-kit#%s my-project` или распакуйте архив ниже в корень проекта.\n' "$GITHUB_REF_NAME" >> release-notes.md
+          {
+            printf '\n---\n\n'
+            printf 'Установка (русская версия): `npx degit webuzateam/Starter-kit#%s my-project`\n\n' "$GITHUB_REF_NAME"
+            printf 'Install (English edition): `npx degit webuzateam/Starter-kit#%s-en my-project`\n\n' "$GITHUB_REF_NAME"
+            printf 'Или распакуйте архив нужного языка в корень проекта / Or unzip the archive for your language into the project root.\n'
+          } >> release-notes.md
       - name: GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" "${{ steps.build.outputs.archive }}" --title "$GITHUB_REF_NAME" --notes-file release-notes.md --verify-tag
+        run: gh release create "$GITHUB_REF_NAME" "${{ steps.build.outputs.ru }}" "${{ steps.build.outputs.en }}" --title "$GITHUB_REF_NAME" --notes-file release-notes.md --verify-tag
