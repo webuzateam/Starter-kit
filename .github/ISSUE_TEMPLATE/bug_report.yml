@@ -1,0 +1,33 @@
+name: Ошибка
+description: Агент действует не по правилам, сценарий не работает или в документах противоречие
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Не публикуйте токены, пароли и личные данные. Уязвимости — через SECURITY.md.
+  - type: input
+    id: version
+    attributes:
+      label: Версия Starter Kit
+      description: Содержимое файла .starter-kit/VERSION
+    validations:
+      required: true
+  - type: input
+    id: agent
+    attributes:
+      label: AI-агент и модель
+      placeholder: Claude Code / Codex / Cursor …
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: Что произошло
+      description: Команда или шаг, ожидаемое и фактическое поведение
+    validations:
+      required: true
+  - type: textarea
+    id: files
+    attributes:
+      label: Затронутые файлы и правила
+      description: Например, prompts/06-close-session.md, раздел 3

@@ -1,0 +1,4 @@
+#!/bin/sh
+# Starter Kit: проверка подготовленных файлов перед каждым commit.
+# Подключение: git config core.hooksPath .starter-kit/hooks
+exec bash "$(git rev-parse --show-toplevel)/.starter-kit/preflight.sh" --staged
