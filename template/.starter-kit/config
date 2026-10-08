@@ -1,0 +1,16 @@
+# Настройки Starter Kit для .starter-kit/preflight.sh.
+# Заполняются на этапе ПРИМЕНИТЬ и при настройке Git (prompts/03-setup-git-github.md).
+# Формат: ключ=значение, без пробелов и кавычек. Никаких секретов.
+# Пустое значение означает «не согласовано» — push будет остановлен.
+
+# private или public
+visibility=
+
+# Согласованный URL origin, например https://github.com/owner/project.git
+remote=
+
+# Основная ветка
+branch=main
+
+# Порог крупного файла в MiB
+large_file_mib=50

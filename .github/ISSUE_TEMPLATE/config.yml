@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Сообщить об уязвимости
+    url: https://github.com/webuzateam/Starter-kit/security/advisories/new
+    about: Приватно, без публичного issue
+  - name: Инструкция
+    url: https://webuza-ai-starter-kit.pages.dev/guide/
+    about: Полное описание Starter Kit

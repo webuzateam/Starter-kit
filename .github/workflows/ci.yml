@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  template:
+    name: Шаблон и документы
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: site/.nvmrc
+      - name: Согласованность документов, ссылок и версий
+        run: node scripts/check-consistency.mjs
+      - name: ShellCheck
+        run: shellcheck --severity=warning template/.starter-kit/preflight.sh template/.starter-kit/hooks/pre-commit scripts/*.sh
+      - name: Тесты preflight.sh
+        run: bash scripts/test-preflight.sh
+
+  secrets:
+    name: Поиск секретов
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: gitleaks
+        run: |
+          docker run --rm -v "$PWD:/repo" ghcr.io/gitleaks/gitleaks:v8.30.1 \
+            dir /repo --redact --no-banner --verbose
+
+  site:
+    name: Сайт
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: site/.nvmrc
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      - run: npm run check
+      - run: npm audit --omit=dev --audit-level=high
