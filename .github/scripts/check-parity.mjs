@@ -4,7 +4,7 @@
 // Текущая версия — рабочее дерево, другая — ветка origin/<main|en>.
 // Запуск: node .github/scripts/check-parity.mjs (нужен git fetch origin main en).
 import { execFileSync } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -27,11 +27,14 @@ const isService = (path) => serviceOnly.some((item) => path === item || path.sta
 const productFiles = (ref) =>
   git("ls-tree", "-r", "--name-only", ref).split("\n").filter(Boolean).filter((path) => !isService(path)).sort();
 
+// Здесь — рабочее дерево: отслеживаемые и новые файлы, которые реально существуют.
 const here = {
-  files: productFiles("HEAD").concat(git("ls-files", "--others", "--exclude-standard").split("\n").filter((p) => p && !isService(p))),
+  files: git("ls-files", "--cached", "--others", "--exclude-standard")
+    .split("\n")
+    .filter((path) => path && !isService(path) && existsSync(join(root, path)))
+    .sort(),
   read: (path) => readFileSync(join(root, path), "utf8"),
 };
-here.files = [...new Set(here.files)].sort();
 const there = {
   files: productFiles(otherRef),
   read: (path) => git("show", `${otherRef}:${path}`),
