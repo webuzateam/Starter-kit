@@ -3,7 +3,7 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [main, en]
 
 permissions:
   contents: read
@@ -18,11 +18,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v7
         with:
           node-version: 24
       - name: Согласованность документов, ссылок и версий
         run: node .github/scripts/check-consistency.mjs
+      - name: Русская и английская версии совпадают
+        run: |
+          git fetch --quiet origin main en
+          node .github/scripts/check-parity.mjs
       - name: ShellCheck
         run: shellcheck --severity=warning .starter-kit/preflight.sh .starter-kit/hooks/pre-commit .github/scripts/*.sh
       - name: Тесты preflight.sh

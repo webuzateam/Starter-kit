@@ -4,6 +4,19 @@
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-10-08
+
+### Добавлено
+
+- Английская версия Starter Kit в ветке `en`: `npx degit webuzateam/Starter-kit#en my-project`. Релиз содержит два архива — русский и английский.
+- `.starter-kit/LANGUAGE` — язык установленной версии; сценарий обновления берёт новую версию того же языка.
+- Пример заполненного проекта на сайте: лендинг кофейни и исследование рынка.
+- Английская версия сайта: `/en/`.
+
+### Изменено
+
+- Правила участия, политика безопасности и кодекс поведения — на двух языках; контакт по кодексу поведения — WebuZaTeam@gmail.com.
+
 ## [1.1.0] - 2026-10-08
 
 ### Изменено
@@ -50,6 +63,7 @@
 
 Внутренние версии: протокол START v2 с тремя режимами, 13 блоков настройки, источники данных и уровни готовности, обязательная замена README проекта, реестр расширений, автоматическое закрытие сессии, сайт-презентация и полная инструкция.
 
-[Unreleased]: https://github.com/webuzateam/Starter-kit/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/webuzateam/Starter-kit/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/webuzateam/Starter-kit/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/webuzateam/Starter-kit/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/webuzateam/Starter-kit/releases/tag/v1.0.0

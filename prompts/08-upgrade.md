@@ -6,14 +6,14 @@
 
 1. Текущая версия — `.starter-kit/VERSION`.
 2. Рабочее дерево чистое. Если нет — предложи сначала `закрываем сессию`.
-3. Узнай у пользователя источник новой версии: архив релиза с GitHub или команда `npx degit webuzateam/Starter-kit <временная папка>` (скачивание — с разрешения). Распакуй во **временную папку вне проекта**.
+3. Узнай у пользователя источник новой версии: архив релиза с GitHub или команда `npx degit webuzateam/Starter-kit <временная папка>` (скачивание — с разрешения). Версия на английском — `npx degit webuzateam/Starter-kit#en`; язык текущей установки записан в `.starter-kit/LANGUAGE`. Распакуй во **временную папку вне проекта**.
 4. Прочитай [CHANGELOG](https://github.com/webuzateam/Starter-kit/blob/main/CHANGELOG.md) Starter Kit или сравни файлы и покажи пользователю, что изменится.
 
 ## 2. Кому принадлежит файл
 
 | Файлы | Принадлежат | Что делать |
 |---|---|---|
-| `prompts/*`, `.starter-kit/VERSION`, `.starter-kit/preflight.sh`, `.starter-kit/hooks/*`, `.claude/commands/kit-*.md`, `docs/HOW_IT_WORKS.md`, `docs/decisions/DECISION_TEMPLATE.md`, `logs/sessions/SESSION_TEMPLATE.md`, `CLAUDE.md` | Starter Kit | Заменить новой версией после показа различий |
+| `prompts/*`, `.starter-kit/VERSION`, `.starter-kit/LANGUAGE`, `.starter-kit/preflight.sh`, `.starter-kit/hooks/*`, `.claude/commands/kit-*.md`, `docs/HOW_IT_WORKS.md`, `docs/decisions/DECISION_TEMPLATE.md`, `logs/sessions/SESSION_TEMPLATE.md`, `CLAUDE.md` | Starter Kit | Заменить новой версией после показа различий |
 | `AGENTS.md` | Смешанный | Взять новую версию, перенести без изменений содержимое между маркерами `PROJECT-RULES` |
 | `.gitignore`, `.env.example` | Смешанный | Добавить новые строки Starter Kit, проектные строки сохранить |
 | `docs/PROJECT_POLICY.md`, `docs/PROJECT_QUESTIONNAIRE.md` | Проект | Не перезаписывать. Если в новой версии появились новые правила или вопросы — показать и предложить добавить |

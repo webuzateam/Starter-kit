@@ -26,7 +26,7 @@ const isService = (path) => serviceOnly.some((item) => path === item || path.sta
 // 1. Обязательные файлы продукта.
 const required = [
   "README.md", "AGENTS.md", "CLAUDE.md", ".gitignore", ".env.example",
-  ".starter-kit/VERSION", ".starter-kit/config", ".starter-kit/preflight.sh", ".starter-kit/hooks/pre-commit", ".starter-kit/LICENSE",
+  ".starter-kit/VERSION", ".starter-kit/LANGUAGE", ".starter-kit/config", ".starter-kit/preflight.sh", ".starter-kit/hooks/pre-commit", ".starter-kit/LICENSE",
   "docs/HOW_IT_WORKS.md", "docs/PROJECT_QUESTIONNAIRE.md", "docs/PROJECT_CONTEXT.md", "docs/PROJECT_POLICY.md",
   "docs/STATUS.md", "docs/GIT_POLICY.md", "docs/SECRETS.md", "docs/RECOVERY.md", "docs/INTEGRATIONS.md",
   "docs/INITIALIZATION_REPORT.md", "docs/CHANGELOG.md", "docs/decisions/README.md", "docs/decisions/DECISION_TEMPLATE.md",
@@ -81,19 +81,21 @@ for (const file of walk(root, (path) => path.endsWith(".md")).map(rel)) {
   }
 }
 
-// 7. 13 блоков настройки и 7 ключевых вопросов.
+// 7. 13 блоков настройки и 7 ключевых вопросов (русская и английская версии).
+const language = read(".starter-kit/LANGUAGE").trim();
+if (!["ru", "en"].includes(language)) fail(`.starter-kit/LANGUAGE: «${language}», ожидается ru или en`);
 const questionnaire = read("docs/PROJECT_QUESTIONNAIRE.md");
-const blocks = [...questionnaire.matchAll(/^## Блок (\d+)\./gm)].map((match) => Number(match[1]));
+const blocks = [...questionnaire.matchAll(/^## (?:Блок|Block) (\d+)\./gm)].map((match) => Number(match[1]));
 if (blocks.length !== 13 || blocks.some((n, i) => n !== i + 1)) fail(`PROJECT_QUESTIONNAIRE.md: ожидалось 13 блоков подряд, найдено ${blocks.length}`);
 const keyQuestions = (questionnaire.match(/^\d+\. ★/gm) ?? []).length;
 if (keyQuestions !== 7) fail(`PROJECT_QUESTIONNAIRE.md: ожидалось 7 ключевых вопросов ★, найдено ${keyQuestions}`);
 for (const file of productFiles.filter((path) => path.endsWith(".md"))) {
   const text = read(file);
-  for (const [phrase, count] of text.matchAll(/(\d+) блок(?:ов|а)\b/g)) {
+  for (const [phrase, count] of text.matchAll(/(\d+) (?:блок(?:ов|а)|setup blocks|blocks)\b/g)) {
     if (count !== "13") fail(`${file}: «${phrase}» — в шаблоне 13 блоков`);
   }
-  for (const [phrase, count] of text.matchAll(/(\d+) (?:ключевых|главных) вопрос/g)) {
-    if (count !== "7") fail(`${file}: «${phrase}» — ключевых вопросов 7`);
+  for (const [phrase, count] of text.matchAll(/(\d+) (?:ключевых|главных) вопрос|(\d+) key questions/g)) {
+    if ((count ?? phrase.match(/\d+/)[0]) !== "7") fail(`${file}: «${phrase}» — ключевых вопросов 7`);
   }
 }
 
@@ -116,4 +118,4 @@ if (errors.length) {
   for (const error of errors) console.error(`  ✖ ${error}`);
   process.exit(1);
 }
-console.log(`Согласованность в порядке: Starter Kit ${version}, файлов продукта — ${productFiles.length}.`);
+console.log(`Согласованность в порядке: Starter Kit ${version} (${language}), файлов продукта — ${productFiles.length}.`);
