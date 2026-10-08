@@ -4,13 +4,13 @@
 
 ## Проверки
 
-- [ ] `node scripts/check-consistency.mjs`
-- [ ] `bash scripts/test-preflight.sh`
-- [ ] `cd site && npm run check` (если менялся сайт)
+- [ ] `node .github/scripts/check-consistency.mjs`
+- [ ] `bash .github/scripts/test-preflight.sh`
 
 ## Чек-лист
 
 - [ ] Правило сформулировано в одном месте, без дублирования
-- [ ] Изменились пути или команды шаблона — обновлены `site/content/`, `template/README.md`, `template/docs/HOW_IT_WORKS.md`
-- [ ] Защитные правила не ослаблены (или есть решение в `dev-docs/decisions/`)
+- [ ] Изменились пути или команды шаблона — обновлены `README.md`, `docs/HOW_IT_WORKS.md` и сайт
+- [ ] Новые служебные файлы добавлены в `.gitattributes` с `export-ignore`
+- [ ] Защитные правила не ослаблены (или есть решение в `.github/decisions/`)
 - [ ] Запись в `CHANGELOG.md` → `[Unreleased]`, если изменение заметно пользователям

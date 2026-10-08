@@ -1,8 +1,19 @@
 # Changelog
 
-Изменения AI Project Starter Kit, заметные пользователям. Формат — [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/), версии — [SemVer](https://semver.org/lang/ru/). Версия продукта хранится в `template/.starter-kit/VERSION`.
+Изменения AI Project Starter Kit, заметные пользователям. Формат — [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/), версии — [SemVer](https://semver.org/lang/ru/). Версия продукта хранится в `.starter-kit/VERSION`.
 
 ## [Unreleased]
+
+## [1.1.0] - 2026-10-08
+
+### Изменено
+
+- Репозиторий `webuzateam/Starter-kit` теперь и есть Starter Kit: шаблон лежит в корне, служебные файлы — в `.github/`.
+- Установка короче: `npx degit webuzateam/Starter-kit my-project`. Служебные файлы репозитория в установку не попадают (`.gitattributes`, `export-ignore`); архив релиза собирается так же.
+- Режим разработки шаблона определяется по `.starter-kit-source` в корне.
+- Сайт перенесён в отдельный репозиторий; в публичном репозитории kit больше нет секретов деплоя.
+
+Проектам на версии 1.0.0 обновляться не обязательно: файлы шаблона не изменились, кроме команды установки в `prompts/08-upgrade.md` и `.starter-kit/VERSION`.
 
 ## [1.0.0] - 2026-10-08
 
@@ -39,5 +50,6 @@
 
 Внутренние версии: протокол START v2 с тремя режимами, 13 блоков настройки, источники данных и уровни готовности, обязательная замена README проекта, реестр расширений, автоматическое закрытие сессии, сайт-презентация и полная инструкция.
 
-[Unreleased]: https://github.com/webuzateam/Starter-kit/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/webuzateam/Starter-kit/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/webuzateam/Starter-kit/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/webuzateam/Starter-kit/releases/tag/v1.0.0

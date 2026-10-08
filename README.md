@@ -1,65 +1,87 @@
 # AI Project Starter Kit
 
-**Проект помнит, даже если чат — нет.** Бесплатная система памяти для проектов, которые ведутся с AI-помощниками: цель, правила, решения и текущее состояние хранятся в файлах проекта, а не в истории чата. Любой агент — Claude Code, Codex, Cursor, Copilot, Gemini CLI — открывает папку и продолжает работу с того места, где вы остановились.
+**Проект помнит, даже если чат — нет.** Бесплатная система памяти для проектов с AI-помощниками: цель, правила, решения и текущее состояние хранятся в файлах проекта, а не в истории чата. Любой агент — Claude Code, Codex, Cursor, Copilot, Gemini CLI — открывает папку и продолжает работу с того места, где вы остановились.
 
-[Сайт](https://webuza-ai-starter-kit.pages.dev/) · [Полная инструкция](https://webuza-ai-starter-kit.pages.dev/guide/) · [Как это работает (для новичков)](template/docs/HOW_IT_WORKS.md) · [English](#english)
+[Сайт](https://webuza-ai-starter-kit.pages.dev/) · [Полная инструкция](https://webuza-ai-starter-kit.pages.dev/guide/) · [Как это работает — для новичков](docs/HOW_IT_WORKS.md) · [English](#english)
 
 ## Установка
 
-**Вариант 1 — одна команда** (нужен Node.js):
+**Новый проект** (нужен Node.js):
 
 ```bash
-npx degit webuzateam/Starter-kit/template my-project
+npx degit webuzateam/Starter-kit my-project
 ```
 
-Для уже существующего проекта выполните внутри его папки:
+**Существующий проект** — внутри его папки:
 
 ```bash
-npx degit webuzateam/Starter-kit/template . --force
+npx degit webuzateam/Starter-kit . --force
 ```
 
-`--force` разрешает запись в непустую папку: файлы с совпадающими именами (например, `README.md`) будут заменены, поэтому сначала сохраните их.
+`--force` разрешает запись в непустую папку: файлы с совпадающими именами, например `README.md`, будут заменены, поэтому сначала сохраните их.
 
-**Вариант 2 — архив.** Скачайте `starter-kit-vX.Y.Z.zip` со страницы [Releases](https://github.com/webuzateam/Starter-kit/releases/latest) и распакуйте содержимое прямо в корень проекта.
+**Без терминала** — скачайте `starter-kit-vX.Y.Z.zip` со страницы [Releases](https://github.com/webuzateam/Starter-kit/releases/latest) и распакуйте содержимое прямо в корень проекта.
 
-Не клонируйте этот репозиторий целиком в качестве проекта: в нём лежат исходники Starter Kit и сайта, а сам шаблон — только папка [`template/`](template/).
+Устанавливайте именно так, а не через `git clone`: в архив попадает только Starter Kit, без служебных файлов этого репозитория.
 
-## Как начать
+## Быстрый старт
 
 1. Откройте папку проекта в AI-помощнике.
 2. Отправьте отдельное сообщение `START` и выберите режим: **с сопровождением**, **быстрый** или **без брифа**.
-3. Проверьте сводку и отправьте `ПРИМЕНИТЬ`.
-4. Работайте как обычно. В конце — `закрываем сессию`.
+3. Проверьте итоговую сводку и отправьте `ПРИМЕНИТЬ`. Этот README будет заменён описанием вашего проекта.
+4. Работайте. В конце — отдельное сообщение `закрываем сессию`.
 5. Новый чат или другой агент? Отправьте `ВОССТАНОВИТЬ`.
 
-Подробно и простыми словами — [template/docs/HOW_IT_WORKS.md](template/docs/HOW_IT_WORKS.md).
+## Команды
 
-## Что внутри
-
-- **Память в файлах:** паспорт проекта, текущий статус, правила, журнал решений и сессий.
-- **Три режима настройки:** пошаговый опрос, 7 быстрых вопросов или автоматический анализ папки.
-- **Безопасность по умолчанию:** удаление, публикация, смена remote и force push — только с вашего разрешения; агент не выдаёт догадки за факты.
-- **Проверка перед commit:** скрипт `.starter-kit/preflight.sh` ищет секреты по содержимому, опасные файлы и крупные файлы, сверяет ветку, `origin` и видимость репозитория.
-- **Переносимость:** работает с любым агентом, который читает `AGENTS.md`; для Claude Code есть команды `/kit-*`.
-- **Обновление без потерь:** команда `ОБНОВИТЬ STARTER KIT` обновляет файлы kit и не трогает данные проекта.
-
-## Структура репозитория
-
-| Путь | Что это |
+| Команда | Что делает |
 |---|---|
-| [`template/`](template/) | Сам Starter Kit — то, что копируется в проект |
-| [`site/`](site/) | Сайт-презентация и инструкция (Next.js, Cloudflare Pages) |
-| [`scripts/`](scripts/) | Проверки репозитория: согласованность документов, тесты `preflight.sh`, сборка релиза |
-| [`dev-docs/`](dev-docs/) | Решения, roadmap и процесс релиза самого Starter Kit |
-| [`.github/`](.github/) | CI, деплой сайта, релизы, шаблоны issues и PR |
+| `START` | Первый запуск или краткий статус |
+| `ПРИМЕНИТЬ` / `APPLY` | Записать сводку настройки в файлы |
+| `закрываем сессию` / `CLOSE SESSION` | Обновить память, проверить, commit и push |
+| `ВОССТАНОВИТЬ` / `RECOVER` | Восстановить контекст в новом чате или у нового агента |
+| `ИЗМЕНИТЬ ПРАВИЛА ПРОЕКТА` / `CHANGE RULES` | Пересмотреть настройки |
+| `ОБНОВИТЬ STARTER KIT` / `UPGRADE KIT` | Обновить Starter Kit без потери данных проекта |
 
-## Участие
+Команда срабатывает только отдельным сообщением. В Claude Code те же сценарии доступны как `/kit-start`, `/kit-apply`, `/kit-close`, `/kit-recover`, `/kit-audit`, `/kit-upgrade`.
 
-Предложения и исправления приветствуются — см. [CONTRIBUTING.md](CONTRIBUTING.md). Уязвимости сообщайте приватно по [SECURITY.md](SECURITY.md).
+## Карта файлов
 
-## Лицензия
+| Путь | Назначение |
+|---|---|
+| `AGENTS.md` | Единые правила для AI: команды, порядок чтения, границы автономности |
+| `CLAUDE.md` | Подключает `AGENTS.md` для Claude Code |
+| `.gitignore`, `.env.example` | Исключение секретов из Git; имена переменных без значений |
+| `.starter-kit/` | Версия, настройки и скрипт проверки `preflight.sh` перед commit и push |
+| `.claude/commands/` | Команды `/kit-*` для Claude Code |
+| `docs/HOW_IT_WORKS.md` | Объяснение для новичка |
+| `docs/PROJECT_QUESTIONNAIRE.md` | Опрос первого запуска и его ответы |
+| `docs/PROJECT_CONTEXT.md` | Паспорт проекта: цель, аудитория, границы, команды |
+| `docs/PROJECT_POLICY.md` | Принятые правила и словарь статусов |
+| `docs/STATUS.md` | Где проект сейчас и что дальше |
+| `docs/GIT_POLICY.md` | Правила Git и GitHub |
+| `docs/SECRETS.md` | Карта секретов — без значений |
+| `docs/RECOVERY.md` | Что сохраняет Git и как восстановить работу |
+| `docs/INTEGRATIONS.md` | Skills, плагины и MCP: источники и восстановление |
+| `docs/INITIALIZATION_REPORT.md` | Отчёт первого запуска |
+| `docs/CHANGELOG.md` | Изменения проекта, заметные пользователю |
+| `docs/decisions/` | Важные решения и их причины |
+| `logs/sessions/` | Краткий дневник рабочих сессий |
+| `prompts/` | Сценарии: старт, применение, аудит, Git, работа, закрытие, восстановление, обновление |
+| `src/`, `outputs/` | Рабочие материалы и готовые результаты |
 
-[MIT](LICENSE). Используйте бесплатно, в том числе в коммерческих проектах.
+## Безопасность по умолчанию
+
+- Удаление, публикация, deploy, смена remote или видимости, force push — только с вашего явного разрешения.
+- Секреты не попадают в Git: `.gitignore` защищает по пути, `.starter-kit/preflight.sh` — по содержимому.
+- Репозиторий проекта по умолчанию приватный; публичный — только по вашему выбору.
+- AI не выдаёт догадки за факты: у каждого значимого значения указан источник.
+
+## Участие и лицензия
+
+Предложения и исправления приветствуются — см. [CONTRIBUTING](https://github.com/webuzateam/Starter-kit/blob/main/.github/CONTRIBUTING.md). Уязвимости сообщайте приватно по [SECURITY](https://github.com/webuzateam/Starter-kit/blob/main/.github/SECURITY.md).
+
+Лицензия [MIT](https://github.com/webuzateam/Starter-kit/blob/main/LICENSE) (копия — `.starter-kit/LICENSE`): используйте бесплатно, в том числе в коммерческих проектах. Версия — `.starter-kit/VERSION`.
 
 ---
 
@@ -68,9 +90,9 @@ npx degit webuzateam/Starter-kit/template . --force
 **AI Project Starter Kit** keeps your AI project's memory in plain files — goals, rules, decisions and current status — instead of a chat history. Any coding agent that reads `AGENTS.md` (Claude Code, Codex, Cursor, Copilot, Gemini CLI…) can pick up exactly where you left off.
 
 ```bash
-npx degit webuzateam/Starter-kit/template my-project
+npx degit webuzateam/Starter-kit my-project
 ```
 
 Open the folder in your AI assistant and send `START`. The kit's documents are written in Russian, but the agent answers in your language and accepts English commands: `APPLY`, `CLOSE SESSION`, `RECOVER`, `CHANGE RULES`, `UPGRADE KIT`.
 
-Safe by default: deletion, publishing, remote changes and force pushes always require your explicit approval; `.starter-kit/preflight.sh` blocks commits that contain secrets or oversized files. Licensed under [MIT](LICENSE).
+Safe by default: deletion, publishing, remote changes and force pushes always require your explicit approval; `.starter-kit/preflight.sh` blocks commits that contain secrets or oversized files. Licensed under MIT.
