@@ -1,22 +1,22 @@
-# Starter Kit: базовые исключения. Секреты исключаются всегда.
-# Остальные правила добавляются только по решению пользователя во время START.
+# Starter Kit: base exclusions. Secrets are always excluded.
+# Other rules are added only by the user's decision during START.
 
-# Системные файлы операционных систем
+# Operating system files
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# Локальные переменные окружения
+# Local environment variables
 .env
 .env.*
 *.env
 *.env.*
 
-# Безопасные примеры должны храниться в Git
+# Safe examples must stay in Git
 !.env.example
 !*.env.example
 
-# Закрытые ключи, сертификаты и хранилища ключей
+# Private keys, certificates and keystores
 *.key
 *.pem
 *.p12
@@ -29,14 +29,14 @@ id_ecdsa*
 id_ed25519*
 !*.pub
 
-# Каталоги и типовые файлы учётных данных
+# Credential folders and typical credential files
 secrets/
 credentials/
 credentials.json
 service-account*.json
 
-# Локальные настройки AI-клиентов, которые могут содержать личные данные
+# Local AI client settings that may contain personal data
 .claude/settings.local.json
 
-# Кэш, сборки и зависимости (node_modules/, .venv/, dist/ и т. п.)
-# добавляются здесь только по подтверждённой политике проекта.
+# Caches, builds and dependencies (node_modules/, .venv/, dist/, etc.)
+# are added here only per the confirmed project policy.

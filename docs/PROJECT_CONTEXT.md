@@ -1,58 +1,58 @@
-# Контекст проекта
+# Project context
 
-Статус документа: **ОЖИДАЕТ ЗАПОЛНЕНИЯ ЧЕРЕЗ START**
+Document status: **AWAITING START**
 
-Стабильное описание проекта: что, зачем, для кого и в каких границах. Текущее состояние сюда не пишется — оно в `docs/STATUS.md`. У неподтверждённых значений указывается источник (словарь — в `docs/PROJECT_POLICY.md`); догадка не выдаётся за факт.
+A stable description of the project: what, why, for whom and within which boundaries. Current state does not go here — it lives in `docs/STATUS.md`. Unconfirmed values carry a source (glossary in `docs/PROJECT_POLICY.md`); a guess is never presented as a fact.
 
-## Название
+## Name
 
-Определяется при первом запуске.
+Defined on first run.
 
-## Что создаём и зачем
+## What we are building and why
 
-Определяется при первом запуске.
+Defined on first run.
 
-## Для кого
+## For whom
 
-Определяется при первом запуске.
+Defined on first run.
 
-## Этап
+## Stage
 
-Определяется при первом запуске.
+Defined on first run.
 
-## Языки
+## Languages
 
-- Основной язык: определяется при первом запуске.
-- Дополнительные языки и правила перевода: определяются при первом запуске.
-- Язык кода и технической документации: определяется при первом запуске.
+- Main language: defined on first run.
+- Additional languages and translation rules: defined on first run.
+- Language of code and technical documentation: defined on first run.
 
-## Границы
+## Boundaries
 
-- Входит в проект: определяется при первом запуске.
-- Не входит в проект: определяется при первом запуске.
-- Ограничения (сроки, бюджет, технологии, юридические требования): определяются при первом запуске.
+- In scope: defined on first run.
+- Out of scope: defined on first run.
+- Constraints (deadlines, budget, technologies, legal requirements): defined on first run.
 
-## Важные пути
+## Important paths
 
-- Корень: текущая открытая папка.
-- Основная работа: `src/`, если не выбрано другое.
-- Результаты: `outputs/`, если не выбрано другое.
-- Память проекта: `docs/`, история сессий: `logs/sessions/`, сценарии: `prompts/`.
+- Root: the currently open folder.
+- Main work: `src/`, unless chosen otherwise.
+- Results: `outputs/`, unless chosen otherwise.
+- Project memory: `docs/`, session history: `logs/sessions/`, flows: `prompts/`.
 
-## Команды запуска и проверки
+## Run and check commands
 
-Определяются при первом запуске. Неизвестные команды не выдумываются — помечаются `ОТЛОЖЕНО`.
+Defined on first run. Unknown commands are not invented — they are marked `DEFERRED`.
 
-## Расширения
+## Extensions
 
-Обязательные и необязательные Skills, плагины и MCP — определяются при первом запуске. Полный реестр — `docs/INTEGRATIONS.md`.
+Mandatory and optional Skills, plugins and MCP — defined on first run. Full register — `docs/INTEGRATIONS.md`.
 
-## Критерии завершения задачи
+## Task completion criteria
 
-Задача завершена, когда:
+A task is complete when:
 
-- выполнен запрос пользователя в согласованных границах;
-- релевантные проверки выполнены или пропущены с объяснением;
-- риски и незавершённые части названы;
-- отложенные решения не скрыты, связанные действия заблокированы;
-- понятен следующий шаг.
+- the user's request is fulfilled within the agreed boundaries;
+- relevant checks were run or skipped with an explanation;
+- risks and unfinished parts are named;
+- deferred decisions are not hidden and the related actions are blocked;
+- the next step is clear.

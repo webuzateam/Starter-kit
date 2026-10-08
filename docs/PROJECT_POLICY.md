@@ -1,73 +1,73 @@
-# Действующие правила проекта
+# Project rules in force
 
-Статус политики: **ОЖИДАЕТ ПРИМЕНЕНИЯ ЧЕРЕЗ START**
+Policy status: **AWAITING APPLY VIA START**
 
-Документ заполняется на этапе `ПРИМЕНИТЬ`. Здесь же находится единый словарь статусов: остальные файлы Starter Kit ссылаются на него и не дают своих определений.
+This document is filled during `APPLY`. It also holds the single status glossary: every other Starter Kit file refers to it instead of defining its own terms.
 
-## Словарь
+## Glossary
 
-### Источник данных
+### Data source
 
-Каждое значимое значение в контексте, опроснике и политике получает одну пометку:
+Every significant value in the context, questionnaire and policy gets exactly one label:
 
-| Пометка | Значение |
+| Label | Meaning |
 |---|---|
-| `ПОДТВЕРЖДЕНО` | Пользователь явно выбрал или написал это значение |
-| `ВЫВЕДЕНО` | Агент вывел значение из файлов проекта; рядом указан путь или короткое основание |
-| `ПО УМОЛЧАНИЮ` | Применено безопасное рекомендуемое значение Starter Kit |
-| `ОТЛОЖЕНО` | Значение неизвестно; указаны событие, при котором нужно вернуться к вопросу, и заблокированное действие |
+| `CONFIRMED` | The user explicitly chose or wrote this value |
+| `INFERRED` | The agent derived it from project files; a path or short reason is given next to it |
+| `DEFAULT` | A safe recommended Starter Kit value was applied |
+| `DEFERRED` | The value is unknown; the event to revisit it and the blocked action are recorded |
 
-### Статус правила
+### Rule status
 
-| Статус | Значение |
+| Status | Meaning |
 |---|---|
-| `ПРИНЯТО` | Правило действует в рекомендуемом виде |
-| `ИЗМЕНЕНО` | Правило действует в изменённом пользователем виде; причина записана ниже |
-| `НЕ ПРИМЕНЯЕТСЯ` | Правило не нужно этому проекту; причина записана ниже |
-| `ЗАБЛОКИРОВАНО` | Связанное действие запрещено до явного ответа пользователя |
-| `ТРЕБУЕТ РЕШЕНИЯ` | Состояние до `ПРИМЕНИТЬ` |
+| `ACCEPTED` | The rule applies as recommended |
+| `CHANGED` | The rule applies in a form changed by the user; the reason is recorded below |
+| `NOT APPLICABLE` | The project does not need the rule; the reason is recorded below |
+| `BLOCKED` | The related action is forbidden until the user answers explicitly |
+| `NEEDS DECISION` | State before `APPLY` |
 
-### Состояние настройки
+### Setup state
 
-`НЕ НАЧАТА` → `В ПРОЦЕССЕ` → `ОЖИДАЕТ ПРИМЕНЕНИЯ` → `ЗАВЕРШЕНА`. Хранится в `docs/PROJECT_QUESTIONNAIRE.md`.
+`NOT STARTED` → `IN PROGRESS` → `AWAITING APPLY` → `COMPLETE`. Stored in `docs/PROJECT_QUESTIONNAIRE.md`.
 
-### Уровень готовности
+### Readiness level
 
-Используется ровно один уровень. Хранится в `docs/STATUS.md`.
+Exactly one level is used. Stored in `docs/STATUS.md`.
 
-| Уровень | Когда |
+| Level | When |
 |---|---|
-| `НЕ ГОТОВ` | `ПРИМЕНИТЬ` не выполнен или есть противоречие, мешающее безопасной работе |
-| `ГОТОВ К ВНУТРЕННЕЙ РАБОТЕ` | Настройка применена, защита активна, но цель или текущая задача ещё требуют уточнений |
-| `РАБОТАЕТ С ОТЛОЖЕННЫМИ РЕШЕНИЯМИ` | Текущая работа понятна; будущие или рискованные действия имеют явные контрольные точки |
-| `ПОЛНОСТЬЮ НАСТРОЕН` | Критичных отложенных решений нет |
+| `NOT READY` | `APPLY` has not been run, or a contradiction prevents safe work |
+| `READY FOR INTERNAL WORK` | Setup is applied and protection is active, but the goal or current task still needs clarification |
+| `WORKING WITH DEFERRED DECISIONS` | Current work is clear; future or risky actions have explicit checkpoints |
+| `FULLY CONFIGURED` | No critical deferred decisions |
 
-Уровень не отменяет контрольные точки: неизвестное разрешение на рискованное действие — это запрет.
+The level does not cancel checkpoints: unknown permission for a risky action means "no".
 
-## Реестр правил
+## Rule register
 
-| ID | Правило | Рекомендуемое значение | Статус | Источник / контрольная точка |
+| ID | Rule | Recommended value | Status | Source / checkpoint |
 |---|---|---|---|---|
-| CORE-01 | Файлы проекта — долговременная память, чат — временный контекст | Включено | Требует решения | Определяется при `START` |
-| CORE-02 | `docs/STATUS.md` — единственный актуальный снимок состояния | Включено | Требует решения | Определяется при `START` |
-| AI-01 | Агент читает правила и статус до работы | Включено | Требует решения | Определяется при `START` |
-| AI-02 | Рискованные и внешние действия требуют явного разрешения | Включено, не отключается | Требует решения | При неизвестности — запрет |
-| AI-03 | Установка программ и зависимостей | Только с разрешения | Требует решения | Определяется при `START` |
-| LANG-01 | Основной язык и правила локализации | Язык пользователя; название без языкового суффикса | Требует решения | Безопасное значение допустимо |
-| DOC-01 | Session log при закрытии содержательной сессии | Стандартный | Требует решения | Безопасное значение допустимо |
-| DOC-02 | Changelog — только изменения, заметные пользователю | Включено | Требует решения | Безопасное значение допустимо |
-| GIT-01 | Один репозиторий на проект | Включено | Требует решения | Подтвердить перед созданием репозитория |
-| GIT-02 | Видимость репозитория | Приватный; публичный только по явному выбору | Требует решения | Подтвердить перед созданием или первым push |
-| GIT-03 | Сохраняются все значимые данные проекта | Секреты исключены; кэш и сборки — по политике | Требует решения | Проверить перед commit |
-| GIT-04 | Force push и переписывание истории | Запрещено без разрешения | Требует решения | При неизвестности — запрет |
-| SEC-01 | Секреты исключаются по пути и проверяются по содержимому | `.gitignore` + `.starter-kit/preflight.sh` | Требует решения | Проверить перед commit |
-| SIZE-01 | Крупный файл требует решения пользователя | От 50 MiB | Требует решения | Проверить перед commit |
-| TEST-01 | Что делать, если проверки не прошли | Личный проект: сохранить и явно отметить ошибку; командный/production: не коммитить | Требует решения | Определяется при `START` |
-| SESSION-01 | `закрываем сессию` разрешает commit и обычный push | Только в согласованный `origin` | Требует решения | Подтвердить перед первым push |
-| RECOVERY-01 | Новый агент сначала восстанавливает контекст | Включено | Требует решения | Безопасное значение допустимо |
-| EXT-01 | Расширения описаны и воспроизводимы | Реестр без секретов | Требует решения | Обнаружить или отложить |
-| REPORT-01 | Задача заканчивается проверяемым отчётом | Стандартный | Требует решения | Безопасное значение допустимо |
+| CORE-01 | Project files are long-term memory, chat is temporary context | On | Needs decision | Set during `START` |
+| CORE-02 | `docs/STATUS.md` is the single current snapshot of state | On | Needs decision | Set during `START` |
+| AI-01 | The agent reads rules and status before working | On | Needs decision | Set during `START` |
+| AI-02 | Risky and external actions require explicit permission | On, cannot be disabled | Needs decision | Unknown means "no" |
+| AI-03 | Installing software and dependencies | Only with permission | Needs decision | Set during `START` |
+| LANG-01 | Main language and localization rules | User's language; no language suffix in the name | Needs decision | Safe default allowed |
+| DOC-01 | Session log when a substantive session is closed | Standard | Needs decision | Safe default allowed |
+| DOC-02 | Changelog — only changes visible to users | On | Needs decision | Safe default allowed |
+| GIT-01 | One repository per project | On | Needs decision | Confirm before creating a repository |
+| GIT-02 | Repository visibility | Private; public only by explicit choice | Needs decision | Confirm before creating or first push |
+| GIT-03 | All meaningful project data is kept | Secrets excluded; caches and builds per policy | Needs decision | Check before commit |
+| GIT-04 | Force push and history rewriting | Forbidden without permission | Needs decision | Unknown means "no" |
+| SEC-01 | Secrets are excluded by path and checked by content | `.gitignore` + `.starter-kit/preflight.sh` | Needs decision | Check before commit |
+| SIZE-01 | A large file requires the user's decision | From 50 MiB | Needs decision | Check before commit |
+| TEST-01 | What to do if checks fail | Personal project: save and flag the failure; team/production: do not commit | Needs decision | Set during `START` |
+| SESSION-01 | `CLOSE SESSION` permits commit and a regular push | Only to the agreed `origin` | Needs decision | Confirm before the first push |
+| RECOVERY-01 | A new agent rebuilds context first | On | Needs decision | Safe default allowed |
+| EXT-01 | Extensions are documented and reproducible | Register without secrets | Needs decision | Discover or defer |
+| REPORT-01 | A task ends with a verifiable report | Standard | Needs decision | Safe default allowed |
 
-## Изменения, исключения и отложенные решения
+## Changes, exceptions and deferred decisions
 
-Заполняется при `START`. Для изменённого правила укажите причину и последствия. Для отложенного — что неизвестно, какая работа разрешена, какое действие заблокировано и при каком событии вернуться к вопросу.
+Filled during `START`. For a changed rule, give the reason and consequences. For a deferred one — what is unknown, which work is allowed, which action is blocked, and on what event to revisit the question.

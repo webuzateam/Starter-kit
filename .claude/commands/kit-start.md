@@ -1,5 +1,5 @@
 ---
-description: Первый запуск или статус Starter Kit (START)
+description: First run or Starter Kit status (START)
 ---
 
-Выполни команду `START` по `prompts/00-start.md`, соблюдая `AGENTS.md`.
+Run the `START` command per `prompts/00-start.md`, following `AGENTS.md`.

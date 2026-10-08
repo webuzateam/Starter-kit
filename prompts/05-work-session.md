@@ -1,24 +1,24 @@
-# Рабочая сессия
+# Work session
 
-Выполни задачу пользователя по правилам `AGENTS.md` и `docs/PROJECT_POLICY.md`.
+Do the user's task following `AGENTS.md` and `docs/PROJECT_POLICY.md`.
 
-## Во время работы
+## While working
 
-- Не меняй несвязанные файлы и не создавай вложенную папку проекта.
-- Запускай релевантные проверки из `docs/PROJECT_CONTEXT.md`.
-- Существенный выбор фиксируй в `docs/decisions/`.
-- При добавлении, удалении или обновлении расширения обнови `docs/INTEGRATIONS.md` (без credentials).
-- Не останавливай безопасную работу ради отложенного вопроса, который на неё не влияет.
-- Перед действием, заблокированным контрольной точкой, задай короткий вопрос-карточку с возможностью оставить запрет в силе.
+- Do not change unrelated files and do not create a nested project folder.
+- Run the relevant checks from `docs/PROJECT_CONTEXT.md`.
+- Record significant choices in `docs/decisions/`.
+- When adding, removing or updating an extension, update `docs/INTEGRATIONS.md` (without credentials).
+- Do not stop safe work for a deferred question that doesn't affect it.
+- Before an action blocked by a checkpoint, ask a short question card with the option to keep the block in place.
 
-## Как дополнять память
+## How to extend memory
 
-- Новый устойчивый факт, решение, ограничение или путь — сразу в подходящий документ с источником.
-- Явное решение пользователя — `ПОДТВЕРЖДЕНО`; сведения из файлов или формулировки задачи — `ВЫВЕДЕНО`, пока пользователь не сделал их правилом.
-- Не превращай гипотезу, пример или разовую просьбу в принятую архитектуру.
-- Закрывай отложенный вопрос только при достаточном основании.
-- Не показывай весь список открытых вопросов после каждой задачи — только относящиеся к текущему действию или безопасности.
+- A new durable fact, decision, constraint or path — straight into the matching document, with its source.
+- An explicit decision of the user — `CONFIRMED`; information from files or the task wording — `INFERRED`, until the user makes it a standing rule.
+- Do not turn a hypothesis, an example or a one-off request into accepted architecture.
+- Close a deferred question only with sufficient grounds.
+- Do not show the whole list of open questions after every task — only those relevant to the current action or safety.
 
-## В конце задачи
+## At the end of the task
 
-Отчёт по разделу 9 `AGENTS.md`. Commit и push — только по команде `закрываем сессию` или другому явному разрешению.
+Report per section 9 of `AGENTS.md`. Commit and push only on `CLOSE SESSION` or another explicit permission.

@@ -1,31 +1,31 @@
-# Обновление Starter Kit
+# Upgrading Starter Kit
 
-Запускается командой `ОБНОВИТЬ STARTER KIT` (`UPGRADE KIT`). Цель — получить новую версию правил и сценариев, не потеряв ни одного данного проекта.
+Runs on the `UPGRADE KIT` command. The goal is to get the new version of rules and flows without losing a single piece of project data.
 
-## 1. Подготовка (ничего не меняя)
+## 1. Preparation (change nothing)
 
-1. Текущая версия — `.starter-kit/VERSION`.
-2. Рабочее дерево чистое. Если нет — предложи сначала `закрываем сессию`.
-3. Узнай у пользователя источник новой версии: архив релиза с GitHub или команда `npx degit webuzateam/Starter-kit <временная папка>` (скачивание — с разрешения). Версия на английском — `npx degit webuzateam/Starter-kit#en`; язык текущей установки записан в `.starter-kit/LANGUAGE`. Распакуй во **временную папку вне проекта**.
-4. Прочитай [CHANGELOG](https://github.com/webuzateam/Starter-kit/blob/main/CHANGELOG.md) Starter Kit или сравни файлы и покажи пользователю, что изменится.
+1. The current version — `.starter-kit/VERSION`.
+2. The working tree is clean. If not — suggest `CLOSE SESSION` first.
+3. Ask the user for the source of the new version: a release archive from GitHub or `npx degit webuzateam/Starter-kit#en <temporary folder>` (downloading — with permission). The Russian edition is `npx degit webuzateam/Starter-kit`; the language of the current installation is recorded in `.starter-kit/LANGUAGE`. Unpack into a **temporary folder outside the project**.
+4. Read the Starter Kit [CHANGELOG](https://github.com/webuzateam/Starter-kit/blob/main/CHANGELOG.md) or compare the files, and show the user what will change.
 
-## 2. Кому принадлежит файл
+## 2. Who owns each file
 
-| Файлы | Принадлежат | Что делать |
+| Files | Owner | What to do |
 |---|---|---|
-| `prompts/*`, `.starter-kit/VERSION`, `.starter-kit/LANGUAGE`, `.starter-kit/preflight.sh`, `.starter-kit/hooks/*`, `.claude/commands/kit-*.md`, `docs/HOW_IT_WORKS.md`, `docs/decisions/DECISION_TEMPLATE.md`, `logs/sessions/SESSION_TEMPLATE.md`, `CLAUDE.md` | Starter Kit | Заменить новой версией после показа различий |
-| `AGENTS.md` | Смешанный | Взять новую версию, перенести без изменений содержимое между маркерами `PROJECT-RULES` |
-| `.gitignore`, `.env.example` | Смешанный | Добавить новые строки Starter Kit, проектные строки сохранить |
-| `docs/PROJECT_POLICY.md`, `docs/PROJECT_QUESTIONNAIRE.md` | Проект | Не перезаписывать. Если в новой версии появились новые правила или вопросы — показать и предложить добавить |
-| `README.md`, остальные `docs/*`, `.starter-kit/config`, `logs/`, `src/`, `outputs/` и всё прочее | Проект | Никогда не перезаписывать |
+| `prompts/*`, `.starter-kit/VERSION`, `.starter-kit/LANGUAGE`, `.starter-kit/preflight.sh`, `.starter-kit/hooks/*`, `.claude/commands/kit-*.md`, `docs/HOW_IT_WORKS.md`, `docs/decisions/DECISION_TEMPLATE.md`, `logs/sessions/SESSION_TEMPLATE.md`, `CLAUDE.md` | Starter Kit | Replace with the new version after showing the differences |
+| `AGENTS.md` | Mixed | Take the new version, carry over the content between the `PROJECT-RULES` markers unchanged |
+| `.gitignore`, `.env.example` | Mixed | Add new Starter Kit lines, keep the project's lines |
+| `docs/PROJECT_POLICY.md`, `docs/PROJECT_QUESTIONNAIRE.md` | Project | Do not overwrite. If the new version has new rules or questions — show them and offer to add |
+| `README.md`, the other `docs/*`, `.starter-kit/config`, `logs/`, `src/`, `outputs/` and everything else | Project | Never overwrite |
 
-## 3. Применение
+## 3. Applying
 
-Покажи план: какие файлы заменяются, какие объединяются, какие новые правила предлагается добавить. Применяй только после явного подтверждения. Затем:
+Show the plan: which files are replaced, which are merged, which new rules are proposed. Apply only after explicit confirmation. Then:
 
-1. Обнови `.starter-kit/VERSION`.
-2. Запусти аудит `prompts/02-audit-project.md`.
-3. Запиши обновление в `docs/STATUS.md`; при существенных изменениях правил создай решение в `docs/decisions/`.
-4. Удали временную папку с новой версией.
+1. Update `.starter-kit/VERSION`.
+2. Run the audit `prompts/02-audit-project.md`.
+3. Record the upgrade in `docs/STATUS.md`; for significant rule changes, create a decision in `docs/decisions/`.
+4. Delete the temporary folder with the new version.
 
-Commit — по команде `закрываем сессию`.
+Commit — on `CLOSE SESSION`.

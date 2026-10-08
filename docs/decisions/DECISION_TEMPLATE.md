@@ -1,28 +1,28 @@
-# NNNN — Краткое название решения
+# NNNN — Short decision title
 
-- Дата: YYYY-MM-DD.
-- Статус: Предложено / Принято / Отклонено / Заменено (ссылка на новое решение).
-- Источник: `ПОДТВЕРЖДЕНО` / `ВЫВЕДЕНО` / `ПО УМОЛЧАНИЮ` (словарь — в `docs/PROJECT_POLICY.md`).
-- Ответственный: владелец проекта.
+- Date: YYYY-MM-DD.
+- Status: Proposed / Accepted / Rejected / Superseded (link to the new decision).
+- Source: `CONFIRMED` / `INFERRED` / `DEFAULT` (glossary in `docs/PROJECT_POLICY.md`).
+- Owner: project owner.
 
-Статус `Принято` допустим только для решения, которое пользователь явно утвердил. Вывод агента или безопасное временное значение записывается как `Предложено`.
+The status `Accepted` is allowed only for a decision the user explicitly approved. An agent's inference or a safe temporary value is recorded as `Proposed`.
 
-## Контекст
+## Context
 
-Что заставило принять решение?
+What forced the decision?
 
-## Решение
+## Decision
 
-Что именно выбрано?
+What exactly was chosen?
 
-## Рассмотренные варианты
+## Options considered
 
-Какие альтернативы были и почему они не подошли?
+Which alternatives existed and why didn't they fit?
 
-## Последствия
+## Consequences
 
-Что станет проще, сложнее или рискованнее? Какая работа разрешена и какое действие остаётся заблокированным до подтверждения?
+What becomes easier, harder or riskier? Which work is allowed and which action stays blocked until confirmed?
 
-## Откат или замена
+## Rollback or replacement
 
-Как отменить решение или перейти на другой вариант?
+How to undo the decision or switch to another option?

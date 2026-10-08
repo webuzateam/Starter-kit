@@ -1,5 +1,5 @@
 ---
-description: Восстановить контекст проекта без изменений
+description: Recover project context without changes
 ---
 
-Выполни команду `ВОССТАНОВИТЬ` по `prompts/07-recovery.md`. Ничего не меняй до готовности отчёта.
+Run the `RECOVER` command per `prompts/07-recovery.md`. Change nothing until the report is ready.

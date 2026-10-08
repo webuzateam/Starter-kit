@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# Starter Kit preflight: проверки перед commit и push.
-# Значения секретов никогда не выводятся — только путь и номера строк.
+# Starter Kit preflight: checks before commit and push.
+# Secret values are never printed — only the path and line numbers.
 #
-# Использование:
-#   bash .starter-kit/preflight.sh            изменённые и новые файлы (до git add)
-#   bash .starter-kit/preflight.sh --staged   только подготовленные файлы (hook pre-commit)
-#   bash .starter-kit/preflight.sh --push     дополнительно ветка, origin и видимость
+# Usage:
+#   bash .starter-kit/preflight.sh            changed and new files (before git add)
+#   bash .starter-kit/preflight.sh --staged   staged files only (pre-commit hook)
+#   bash .starter-kit/preflight.sh --push     also branch, origin and visibility
 #
-# Коды выхода: 0 — можно продолжать; 1 — STOP, нужно решение человека; 2 — ошибка запуска.
-# Совместим с bash 3.2 (macOS), Linux и Git Bash (Windows).
+# Exit codes: 0 — OK to continue; 1 — STOP, a human decision is needed; 2 — usage error.
+# Works with bash 3.2 (macOS), Linux and Git Bash (Windows).
 
 scope=all
 check_push=0
@@ -17,11 +17,11 @@ for arg in "$@"; do
     --staged) scope=staged ;;
     --push) check_push=1 ;;
     -h|--help) sed -n '2,11p' "$0"; exit 0 ;;
-    *) echo "Неизвестный параметр: $arg (см. --help)" >&2; exit 2 ;;
+    *) echo "Unknown option: $arg (see --help)" >&2; exit 2 ;;
   esac
 done
 
-root=$(git rev-parse --show-toplevel 2>/dev/null) || { echo "Git-репозиторий не найден. Сначала настройте Git: prompts/03-setup-git-github.md" >&2; exit 2; }
+root=$(git rev-parse --show-toplevel 2>/dev/null) || { echo "No Git repository found. Set up Git first: prompts/03-setup-git-github.md" >&2; exit 2; }
 cd "$root" || exit 2
 
 config=.starter-kit/config
@@ -41,36 +41,36 @@ stop() { echo "STOP  $*"; stops=$((stops + 1)); }
 warn() { echo "WARN  $*"; warns=$((warns + 1)); }
 ok()   { echo "OK    $*"; }
 
-# --- Список проверяемых файлов -------------------------------------------------
+# --- Files to check -------------------------------------------------
 files=()
 if [ "$scope" = staged ]; then
   while IFS= read -r -d '' f; do files+=("$f"); done < <(git diff --cached --name-only --diff-filter=ACMR -z)
 else
   while IFS= read -r -d '' f; do files+=("$f"); done < <({ git diff --cached --name-only --diff-filter=ACMR -z; git ls-files -m -o --exclude-standard -z; } | sort -zu)
 fi
-echo "Starter Kit preflight: проверяется файлов — ${#files[@]}"
+echo "Starter Kit preflight: checking ${#files[@]} file(s)"
 
-# --- README мастер-шаблона -----------------------------------------------------
+# --- Template README -----------------------------------------------------
 if [ ! -f .starter-kit-source ] && [ -f README.md ] && head -n 1 README.md | grep -q '^# AI Project Starter Kit'; then
-  stop "README.md всё ещё описывает Starter Kit. Завершите настройку командой ПРИМЕНИТЬ."
+  stop "README.md still describes Starter Kit. Finish setup with the APPLY command."
 fi
 
-# --- Опасные имена файлов ------------------------------------------------------
+# --- Dangerous file names ------------------------------------------------------
 name_hits=0
 for f in "${files[@]}"; do
   base=${f##*/}
   case "$base" in
     .env.example|*.env.example|*.pub) continue ;;
     .env|.env.*|*.env|*.pem|*.key|*.p12|*.pfx|*.jks|*.keystore|id_rsa*|id_dsa*|id_ecdsa*|id_ed25519*|credentials.json|service-account*.json|*.tfstate|*.tfstate.*)
-      stop "файл с секретами по имени: $f"; name_hits=$((name_hits + 1)) ;;
+      stop "secret file by name: $f"; name_hits=$((name_hits + 1)) ;;
     .npmrc|.pypirc|.netrc|.git-credentials)
-      warn "файл может содержать токен: $f — проверьте вручную"; name_hits=$((name_hits + 1)) ;;
+      warn "file may contain a token: $f — check it manually"; name_hits=$((name_hits + 1)) ;;
   esac
 done
-[ "$name_hits" -eq 0 ] && ok "опасных имён файлов нет"
+[ "$name_hits" -eq 0 ] && ok "no dangerous file names"
 
-# --- Секреты по содержимому ----------------------------------------------------
-# Высокоточные шаблоны известных форматов ключей: совпадение = STOP.
+# --- Secrets by content ----------------------------------------------------
+# High-precision patterns of known key formats: a match = STOP.
 strict='-----BEGIN ([A-Z]+ )*PRIVATE KEY( BLOCK)?-----'
 strict="$strict|(AKIA|ASIA)[0-9A-Z]{16}"
 strict="$strict|gh[pousr]_[A-Za-z0-9]{36,}|github_pat_[A-Za-z0-9_]{60,}"
@@ -82,7 +82,7 @@ strict="$strict|(sk|rk)_live_[0-9A-Za-z]{20,}"
 strict="$strict|AIza[0-9A-Za-z_-]{35}"
 strict="$strict|[0-9]{8,10}:AA[0-9A-Za-z_-]{33}"
 strict="$strict|npm_[A-Za-z0-9]{36}"
-# Общие присваивания вида password = "...": возможны ложные срабатывания, поэтому WARN.
+# Generic assignments like password = "...": false positives are possible, hence WARN.
 loose="(password|passwd|secret|token|api[_-]?key|access[_-]?key)[\"']?[[:space:]]*[:=][[:space:]]*[\"'][^\"'[:space:]]{8,}[\"']"
 
 secret_hits=0
@@ -91,15 +91,15 @@ for f in "${files[@]}"; do
   [ "$f" = "$self" ] && continue
   lines=$(grep -nEI -e "$strict" -- "$f" 2>/dev/null | cut -d: -f1 | head -n 20 | tr '\n' ',' | sed 's/,$//')
   if [ -n "$lines" ]; then
-    stop "возможный секрет: $f (строки: $lines)"; secret_hits=$((secret_hits + 1))
+    stop "possible secret: $f (lines: $lines)"; secret_hits=$((secret_hits + 1))
     continue
   fi
   lines=$(grep -niEI -e "$loose" -- "$f" 2>/dev/null | cut -d: -f1 | head -n 20 | tr '\n' ',' | sed 's/,$//')
   if [ -n "$lines" ]; then
-    warn "похоже на пароль или токен: $f (строки: $lines) — проверьте, что это не реальное значение"; secret_hits=$((secret_hits + 1))
+    warn "looks like a password or token: $f (lines: $lines) — make sure it is not a real value"; secret_hits=$((secret_hits + 1))
   fi
 done
-[ "$secret_hits" -eq 0 ] && ok "секретов по содержимому не найдено"
+[ "$secret_hits" -eq 0 ] && ok "no secrets found by content"
 
 if command -v gitleaks >/dev/null 2>&1 && [ "$scope" = staged ]; then
   if gitleaks help git >/dev/null 2>&1; then
@@ -107,12 +107,12 @@ if command -v gitleaks >/dev/null 2>&1 && [ "$scope" = staged ]; then
   else
     gitleaks protect --staged --redact --no-banner >/dev/null 2>&1
   fi
-  if [ $? -eq 0 ]; then ok "gitleaks: утечек нет"; else stop "gitleaks нашёл возможную утечку — запустите gitleaks с --redact для деталей"; fi
+  if [ $? -eq 0 ]; then ok "gitleaks: no leaks"; else stop "gitleaks found a possible leak — run gitleaks with --redact for details"; fi
 fi
 
-# --- Крупные файлы -------------------------------------------------------------
+# --- Large files -------------------------------------------------------------
 limit_mib=$(setting large_file_mib 50)
-case "$limit_mib" in ''|*[!0-9]*) warn "large_file_mib в $config не число — используется 50"; limit_mib=50 ;; esac
+case "$limit_mib" in ''|*[!0-9]*) warn "large_file_mib in $config is not a number — using 50"; limit_mib=50 ;; esac
 limit=$((limit_mib * 1024 * 1024))
 github_limit=$((100 * 1024 * 1024))
 size_hits=0
@@ -122,42 +122,42 @@ for f in "${files[@]}"; do
   if [ "$size" -ge "$limit" ]; then
     mib=$((size / 1024 / 1024))
     if [ "$size" -ge "$github_limit" ]; then
-      stop "крупный файл: $f — ${mib} MiB, GitHub отклонит файл больше 100 MiB"
+      stop "large file: $f — ${mib} MiB, GitHub rejects files over 100 MiB"
     else
-      stop "крупный файл: $f — ${mib} MiB (порог ${limit_mib} MiB)"
+      stop "large file: $f — ${mib} MiB (threshold ${limit_mib} MiB)"
     fi
     size_hits=$((size_hits + 1))
   fi
 done
-[ "$size_hits" -eq 0 ] && ok "файлов от ${limit_mib} MiB нет"
+[ "$size_hits" -eq 0 ] && ok "no files of ${limit_mib} MiB or more"
 
-# --- Ветка, origin и видимость -------------------------------------------------
+# --- Branch, origin and visibility -------------------------------------------------
 if [ "$check_push" -eq 1 ]; then
   expected_branch=$(setting branch main)
   branch=$(git symbolic-ref --quiet --short HEAD 2>/dev/null)
   if [ -z "$branch" ]; then
-    stop "HEAD не указывает на ветку (detached HEAD)"
+    stop "HEAD is not on a branch (detached HEAD)"
   elif [ "$branch" != "$expected_branch" ]; then
-    stop "текущая ветка «$branch», согласована «$expected_branch»"
+    stop "current branch is '$branch', agreed '$expected_branch'"
   else
-    ok "ветка $branch"
+    ok "branch $branch"
   fi
 
   expected_remote=$(setting remote "")
   remote=$(git remote get-url origin 2>/dev/null)
   if [ -z "$remote" ]; then
-    stop "origin не настроен"
+    stop "origin is not set"
   elif [ -z "$expected_remote" ]; then
-    stop "origin не согласован: заполните remote в $config"
+    stop "origin is not agreed: fill in remote in $config"
   elif [ "${remote%.git}" != "${expected_remote%.git}" ]; then
-    stop "origin изменился: сейчас $remote, согласован $expected_remote"
+    stop "origin changed: now $remote, agreed $expected_remote"
   else
-    ok "origin совпадает с согласованным"
+    ok "origin matches the agreed one"
   fi
 
   expected_visibility=$(setting visibility "" | tr '[:upper:]' '[:lower:]')
   if [ -z "$expected_visibility" ]; then
-    stop "видимость репозитория не согласована: заполните visibility в $config"
+    stop "repository visibility is not agreed: fill in visibility in $config"
   elif [ -n "$remote" ]; then
     case "$remote" in
       *github.com[:/]*)
@@ -165,28 +165,28 @@ if [ "$check_push" -eq 1 ]; then
         slug=${slug#[:/]}
         slug=${slug%.git}
         if ! command -v gh >/dev/null 2>&1; then
-          warn "GitHub CLI не установлен — видимость $slug не проверена"
+          warn "GitHub CLI is not installed — visibility of $slug not checked"
         else
           actual=$(gh repo view "$slug" --json visibility -q .visibility 2>/dev/null | tr '[:upper:]' '[:lower:]')
           if [ -z "$actual" ]; then
-            stop "не удалось проверить видимость $slug (нет авторизации или доступа: gh auth status)"
+            stop "could not check visibility of $slug (no auth or access: gh auth status)"
           elif [ "$actual" != "$expected_visibility" ]; then
-            stop "видимость репозитория «$actual», согласована «$expected_visibility»"
+            stop "repository visibility is '$actual', agreed '$expected_visibility'"
           else
-            ok "видимость: $actual"
+            ok "visibility: $actual"
           fi
         fi
         ;;
-      *) warn "origin не на GitHub — проверьте видимость вручную (согласовано: $expected_visibility)" ;;
+      *) warn "origin is not on GitHub — check visibility manually (agreed: $expected_visibility)" ;;
     esac
   fi
 fi
 
-# --- Итог ----------------------------------------------------------------------
+# --- Summary ----------------------------------------------------------------------
 echo
 if [ "$stops" -gt 0 ]; then
-  echo "Итог: STOP ($stops), WARN ($warns). Commit и push остановлены до решения пользователя."
+  echo "Result: STOP ($stops), WARN ($warns). Commit and push are stopped until the user decides."
   exit 1
 fi
-echo "Итог: можно продолжать. Предупреждений: $warns."
+echo "Result: OK to continue. Warnings: $warns."
 exit 0

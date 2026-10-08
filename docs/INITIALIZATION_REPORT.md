@@ -1,58 +1,58 @@
-# Отчёт инициализации
+# Initialization report
 
-Статус: **НЕ СФОРМИРОВАН** — создаётся после `ПРИМЕНИТЬ`.
+Status: **NOT CREATED** — created after `APPLY`.
 
-Отчёт подтверждает, с чем проект начал работу. Он не скрывает отложенные решения и не превращает неизвестное разрешение в согласие. Словарь статусов — в `docs/PROJECT_POLICY.md`.
+The report confirms what the project started with. It does not hide deferred decisions and never turns unknown permission into consent. Status glossary — `docs/PROJECT_POLICY.md`.
 
-## Проект
+## Project
 
-- Название: —
-- Корневая папка: —
-- Версия Starter Kit: —
-- Режим START: —
-- Уровень готовности: **НЕ ГОТОВ**
+- Name: —
+- Root folder: —
+- Starter Kit version: —
+- START mode: —
+- Readiness level: **NOT READY**
 
-## Источники данных
+## Data sources
 
-| Источник | Количество значимых значений |
+| Source | Number of significant values |
 |---|---|
-| `ПОДТВЕРЖДЕНО` | 0 |
-| `ВЫВЕДЕНО` | 0 |
-| `ПО УМОЛЧАНИЮ` | 0 |
-| `ОТЛОЖЕНО` | 0 |
+| `CONFIRMED` | 0 |
+| `INFERRED` | 0 |
+| `DEFAULT` | 0 |
+| `DEFERRED` | 0 |
 
-## Правила
+## Rules
 
-| Статус | Количество |
+| Status | Count |
 |---|---|
-| `ПРИНЯТО` | 0 |
-| `ИЗМЕНЕНО` | 0 |
-| `НЕ ПРИМЕНЯЕТСЯ` | 0 |
-| `ЗАБЛОКИРОВАНО` | 0 |
+| `ACCEPTED` | 0 |
+| `CHANGED` | 0 |
+| `NOT APPLICABLE` | 0 |
+| `BLOCKED` | 0 |
 
-## Проверки готовности
+## Readiness checks
 
-| Проверка | Результат |
+| Check | Result |
 |---|---|
-| Режим выбран, сводка применена, 13 блоков охвачены | Нет |
-| У значимых данных указан источник | Нет |
-| `README.md` описывает проект, а не Starter Kit | Нет |
-| Язык работы определён | Нет |
-| Противоречия, мешающие работе, устранены | Нет |
-| Отложенные решения и заблокированные действия перечислены | Нет |
-| Секретные пути и `.gitignore` настроены | Нет |
-| `.starter-kit/config` заполнен или Git-действия заблокированы | Нет |
-| Реестр расширений заполнен или явно отложен | Нет |
-| Порядок восстановления принят | Нет |
+| Mode chosen, summary applied, 13 blocks covered | No |
+| Significant data has a source | No |
+| `README.md` describes the project, not Starter Kit | No |
+| Working language defined | No |
+| Contradictions that block work resolved | No |
+| Deferred decisions and blocked actions listed | No |
+| Secret paths and `.gitignore` configured | No |
+| `.starter-kit/config` filled or Git actions blocked | No |
+| Extension register filled or explicitly deferred | No |
+| Recovery order accepted | No |
 
-## Отложенные решения
+## Deferred decisions
 
-Заполняется после `ПРИМЕНИТЬ`: вопрос, причина, разрешённая работа, заблокированное действие, событие повторного вопроса.
+Filled after `APPLY`: question, reason, allowed work, blocked action, event to revisit.
 
-## Аудит
+## Audit
 
-Заполняется результатом `prompts/02-audit-project.md`.
+Filled with the result of `prompts/02-audit-project.md`.
 
-## Итог
+## Result
 
-**ПРОЕКТ НЕ ГОТОВ. ОТПРАВЬТЕ `START`.**
+**PROJECT NOT READY. SEND `START`.**

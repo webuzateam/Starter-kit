@@ -1,5 +1,5 @@
 ---
-description: Read-only аудит настройки проекта
+description: Read-only audit of the project setup
 ---
 
-Проведи аудит по `prompts/02-audit-project.md`. Ничего не исправляй без разрешения.
+Audit per `prompts/02-audit-project.md`. Fix nothing without permission.

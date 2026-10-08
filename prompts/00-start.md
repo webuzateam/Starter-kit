@@ -1,36 +1,36 @@
-# Команда START
+# The START command
 
-Запускается только отдельным сообщением `START`. Протокол **START v2**: ровно три режима — **с сопровождением**, **быстрый**, **без брифа**. Другие режимы не предлагай.
+Runs only when `START` is sent as a separate message. Protocol **START v2**: exactly three modes — **guided**, **quick**, **no brief**. Do not offer other modes.
 
-## 1. Определи состояние (ничего не меняя)
+## 1. Determine the state (change nothing)
 
-Прочитай `AGENTS.md`, `docs/PROJECT_QUESTIONNAIRE.md`, `docs/STATUS.md`, `.starter-kit/VERSION`. Проверь фактический корень, отсутствие лишней вложенной папки и наличие Git-репозитория.
+Read `AGENTS.md`, `docs/PROJECT_QUESTIONNAIRE.md`, `docs/STATUS.md`, `.starter-kit/VERSION`. Check the actual root, that there is no extra nested folder, and whether a Git repository exists.
 
-- `ЗАВЕРШЕНА` — настройку не повторяй. Кратко покажи цель, уровень готовности, контрольные точки, относящиеся к следующему шагу, и предложи начать работу. Для пересмотра правил — `ИЗМЕНИТЬ ПРАВИЛА ПРОЕКТА`.
-- `В ПРОЦЕССЕ` — продолжи выбранный режим с сохранённого блока.
-- `ОЖИДАЕТ ПРИМЕНЕНИЯ` — не повторяй вопросы: покажи сводку и напомни про `ПРИМЕНИТЬ`.
-- `НЕ НАЧАТА` — переходи к шагу 2.
+- `COMPLETE` — do not repeat setup. Briefly show the goal, readiness level, checkpoints relevant to the next step, and offer to start work. To revisit rules — `CHANGE RULES`.
+- `IN PROGRESS` — continue the chosen mode from the saved block.
+- `AWAITING APPLY` — do not repeat the questions: show the summary and remind about `APPLY`.
+- `NOT STARTED` — go to step 2.
 
-Если в папке уже есть материалы проекта (код, документы), упомяни, что они останутся нетронутыми и будут учтены при настройке.
+If the folder already contains project materials (code, documents), mention that they will stay untouched and will be taken into account during setup.
 
-## 2. Короткое знакомство
+## 2. A short introduction
 
-Объясни простыми словами, без копирования `docs/HOW_IT_WORKS.md`:
+Explain in simple words, without copying `docs/HOW_IT_WORKS.md`:
 
-- память проекта хранится в файлах, поэтому работу может продолжить любой агент;
-- путь: `START → режим → сводка → ПРИМЕНИТЬ → работа → закрываем сессию`;
-- до `ПРИМЕНИТЬ` агент ничего не меняет в проекте, кроме записи ответов в опросник;
-- опасные действия (публикация, удаление, смена remote, force push) всегда требуют вашего разрешения;
-- подробное объяснение для новичка — `docs/HOW_IT_WORKS.md`.
+- project memory lives in files, so any agent can continue the work;
+- the path: `START → mode → summary → APPLY → work → CLOSE SESSION`;
+- until `APPLY` the agent changes nothing in the project except recording answers in the questionnaire;
+- risky actions (publishing, deleting, changing the remote, force pushing) always require your permission;
+- a detailed explanation for beginners — `docs/HOW_IT_WORKS.md`.
 
-## 3. Предложи режим и дождись выбора
+## 3. Offer the mode and wait for a choice
 
-1. **С сопровождением — рекомендуется.** Пошагово, с объяснениями и вариантами ответов. Около 10–15 минут.
-2. **Быстрый.** 7 ключевых вопросов, остальное — безопасные значения. Около 3–5 минут.
-3. **Без брифа.** Агент сам изучает файлы и откладывает неизвестное. Подходит для существующего проекта.
+1. **Guided — recommended.** Step by step, with explanations and answer options. About 10–15 minutes.
+2. **Quick.** 7 key questions, the rest are safe values. About 3–5 minutes.
+3. **No brief.** The agent studies the files and defers the unknown. Suits an existing project.
 
-Ни один режим не разрешает агенту самому одобрять рискованные действия.
+No mode allows the agent to approve risky actions on its own.
 
-## 4. Проведи настройку
+## 4. Run the setup
 
-Следуй `prompts/01-initialize-project.md`. Формат вопросов — раздел 5 `AGENTS.md`. Для открытых фактов (название, цель) сначала предложи 1–2 формулировки по контексту. Не запрашивай значения секретов, не выдумывай факты, указывай источник каждого значимого ответа.
+Follow `prompts/01-initialize-project.md`. Question format — section 5 of `AGENTS.md`. For open facts (name, goal), first suggest 1–2 wordings based on context. Do not ask for secret values, do not invent facts, give the source of every significant answer.

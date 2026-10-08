@@ -1,26 +1,26 @@
-# Секреты и доступы
+# Secrets and access
 
-Этот файл — только карта: **где** хранится секрет и **как** его восстановить. Значения токенов, паролей, ключей, seed phrases и recovery codes здесь никогда не записываются.
+This file is only a map: **where** a secret is stored and **how** to restore it. Values of tokens, passwords, keys, seed phrases and recovery codes are never written here.
 
-## Принципы
+## Principles
 
-- Значения секретов хранятся вне Git: в менеджере паролей, хранилище команды или переменных окружения CI.
-- `.env.example` содержит только имена переменных и безопасные примеры.
-- Защита двойная: `.gitignore` исключает секретные **пути**, `.starter-kit/preflight.sh` проверяет **содержимое** файлов перед commit. Токен может оказаться в обычном Markdown, JSON или исходнике.
-- Найденный секрет не выводится в чат, отчёт или лог — только путь и номер строки.
-- OAuth-токены, ключи MCP-серверов, credentials коннекторов и плагинов — тоже секреты.
-- Если секрет попал в историю: сначала отозвать или заменить его у поставщика, затем отдельно решить вопрос очистки истории (`docs/GIT_POLICY.md`).
+- Secret values live outside Git: in a password manager, a team vault or CI environment variables.
+- `.env.example` contains only variable names and safe examples.
+- Protection is twofold: `.gitignore` excludes secret **paths**, `.starter-kit/preflight.sh` checks file **content** before a commit. A token can end up in an ordinary Markdown, JSON or source file.
+- A found secret is never printed to the chat, a report or a log — only the path and line number.
+- OAuth tokens, MCP server keys, connector and plugin credentials are secrets too.
+- If a secret got into history: first revoke or rotate it with the provider, then separately decide whether to clean history (`docs/GIT_POLICY.md`).
 
-## Карта восстановления
+## Recovery map
 
-| Назначение | Переменная или файл | Где хранится значение | Ответственный | Проверено |
+| Purpose | Variable or file | Where the value is stored | Owner | Verified |
 |---|---|---|---|---|
-| — | — | Заполняется при `START` | — | — |
+| — | — | Filled during `START` | — | — |
 
-## Дополнительные секретные пути
+## Additional secret paths
 
-Заполняются при `START`; каждый путь также добавляется в `.gitignore`.
+Filled during `START`; each path is also added to `.gitignore`.
 
-## Recovery codes и 2FA
+## Recovery codes and 2FA
 
-Место хранения выбирает пользователь. Коды не копируются в проект и не передаются AI.
+The user chooses where to store them. Codes are never copied into the project or given to AI.

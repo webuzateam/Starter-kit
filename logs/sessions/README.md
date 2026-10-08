@@ -1,11 +1,11 @@
-# Журнал сессий
+# Session log
 
-Здесь хранится краткая история содержательных рабочих сессий. Session log не является копией чата и не дублирует Git.
+A short history of substantive work sessions. A session log is not a copy of the chat and does not duplicate Git.
 
-Формат имени:
+File name format:
 
 ```text
-YYYY-MM-DD-HHMM-краткая-тема.md
+YYYY-MM-DD-HHMM-short-topic.md
 ```
 
-Каждый лог содержит запрос, загруженный контекст, результат, файлы, безопасные названия команд, проверки, решения, открытые вопросы и следующий шаг. Значения секретов и полный вывод терминала не сохраняются.
+Each log contains the request, the context loaded, the result, files, safe command names, checks, decisions, open questions and the next step. Secret values and full terminal output are never saved.

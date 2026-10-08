@@ -1,43 +1,43 @@
-# Закрытие сессии
+# Closing a session
 
-Запускается отдельной командой `закрываем сессию` (`CLOSE SESSION`). Команда заранее разрешает обновить память, выполнить проверки, создать commit и сделать обычный push в согласованный `origin` — в границах раздела 8 `AGENTS.md`.
+Runs on the separate `CLOSE SESSION` command. The command grants advance permission to update memory, run checks, create a commit and do a regular push to the agreed `origin` — within the boundaries of section 8 of `AGENTS.md`.
 
-## 1. Обнови память
+## 1. Update memory
 
-- `docs/STATUS.md`: дата, результат, уровень готовности, отложенные решения, заблокированные действия, следующий шаг.
-- Session log по `logs/sessions/SESSION_TEMPLATE.md` — если работа была содержательной.
-- Changelog, решения, `docs/RECOVERY.md`, `docs/INTEGRATIONS.md` — только если изменилось то, что они описывают.
+- `docs/STATUS.md`: date, result, readiness level, deferred decisions, blocked actions, next step.
+- A session log from `logs/sessions/SESSION_TEMPLATE.md` — if the work was substantive.
+- Changelog, decisions, `docs/RECOVERY.md`, `docs/INTEGRATIONS.md` — only if what they describe has changed.
 
-## 2. Проверки
+## 2. Checks
 
-- Запусти согласованные проверки проекта, зафиксируй результат.
-- Если проверки упали — действуй по правилу TEST-01 из `docs/PROJECT_POLICY.md`.
+- Run the agreed project checks and record the result.
+- If checks fail — follow rule TEST-01 in `docs/PROJECT_POLICY.md`.
 
 ## 3. Preflight
 
-Если Git не настроен — закончи отчётом и предложи `prompts/03-setup-git-github.md`.
+If Git is not set up — finish with the report and suggest `prompts/03-setup-git-github.md`.
 
 1. `.starter-kit/preflight.sh --push`.
-2. `STOP` — остановись. Покажи пути и причины (без значений секретов) и варианты решения.
-3. `WARN` — оцени и упомяни в отчёте.
-4. Отдельно проверь, что ни одно отложенное решение не блокирует commit или push. Не закрывай контрольную точку предположением агента.
+2. `STOP` — stop. Show paths and reasons (without secret values) and the options.
+3. `WARN` — assess and mention it in the report.
+4. Separately check that no deferred decision blocks the commit or push. Never close a checkpoint by an agent's assumption.
 
-## 4. Commit и push
+## 4. Commit and push
 
-1. Добавь все значимые изменения по Git-политике.
-2. `git diff --cached --stat` и `git diff --cached --check`.
-3. `.starter-kit/preflight.sh --staged` — финальная проверка подготовленного состава.
-4. Нет изменений — commit не создавай.
-5. Содержательное сообщение commit.
-6. Обычный push. Отклонён, конфликт, расходящаяся история, нужна авторизация — остановись и сообщи; force push не используй.
-7. Проверь commit, ветку, remote и чистоту рабочего дерева.
+1. Add all meaningful changes per the Git policy.
+2. `git diff --cached --stat` and `git diff --cached --check`.
+3. `.starter-kit/preflight.sh --staged` — a final check of the staged set.
+4. No changes — do not create a commit.
+5. A meaningful commit message.
+6. A regular push. Rejected, conflict, diverged history, authentication needed — stop and report; never force push.
+7. Check the commit, branch, remote and a clean working tree.
 
-## 5. Отчёт
+## 5. Report
 
-1. Что завершено.
-2. Какие документы памяти обновлены.
-3. Какие файлы добавлены, изменены, удалены.
-4. Проверки: прошли / не прошли.
-5. Результат preflight (секреты, крупные файлы, remote, видимость).
-6. Ветка, remote, commit, push.
-7. Уровень готовности, отложенные решения, первый следующий шаг.
+1. What is complete.
+2. Which memory documents were updated.
+3. Which files were added, changed, deleted.
+4. Checks: passed / failed.
+5. Preflight result (secrets, large files, remote, visibility).
+6. Branch, remote, commit, push.
+7. Readiness level, deferred decisions, the first next step.

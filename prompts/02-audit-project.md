@@ -1,37 +1,37 @@
-# Аудит проекта
+# Project audit
 
-Read-only проверка. Не исправляй найденное без разрешения — кроме аудита внутри уже подтверждённой команды `ПРИМЕНИТЬ`.
+A read-only check. Do not fix what you find without permission — except for an audit inside an already confirmed `APPLY` command.
 
-## Структура
+## Structure
 
-- Файлы Starter Kit лежат прямо в корне, нет случайной вложенной копии проекта.
-- Обязательные файлы существуют: `AGENTS.md`, `README.md`, `.gitignore`, `.starter-kit/VERSION`, `.starter-kit/config`, `.starter-kit/preflight.sh`, документы из `docs/`, сценарии из `prompts/`.
-- Внутренние ссылки и пути согласованы.
-- Нет системного мусора; кэш и зависимости соответствуют политике.
+- Starter Kit files sit directly in the root; there is no accidental nested copy of the project.
+- Required files exist: `AGENTS.md`, `README.md`, `.gitignore`, `.starter-kit/VERSION`, `.starter-kit/config`, `.starter-kit/preflight.sh`, the documents in `docs/`, the flows in `prompts/`.
+- Internal links and paths are consistent.
+- No system junk; caches and dependencies follow the policy.
 
-## Настройка
+## Setup
 
-- Режим START записан, сводка применена, 13 блоков охвачены.
-- У значимых данных есть источник; выводы агента не помечены как подтверждённые.
-- Язык работы определён.
-- Для каждого отложенного вопроса указаны разрешённая работа, заблокированное действие и событие повторного вопроса.
-- Неизвестное разрешение на опасное действие трактуется как запрет.
-- `README.md` описывает проект и не противоречит `docs/PROJECT_CONTEXT.md` и `docs/STATUS.md`.
-- Раздел `PROJECT-RULES` в `AGENTS.md` заполнен; защитные разделы не изменены.
-- Контекст, политика, статус и `.starter-kit/config` не противоречат друг другу.
-- Расширения перечислены в `docs/INTEGRATIONS.md` или явно отложены.
+- The START mode is recorded, the summary applied, all 13 blocks covered.
+- Significant data has a source; agent inferences are not marked as confirmed.
+- The working language is defined.
+- Every deferred question lists the allowed work, the blocked action and the event to revisit it.
+- Unknown permission for a dangerous action is treated as "no".
+- `README.md` describes the project and does not contradict `docs/PROJECT_CONTEXT.md` and `docs/STATUS.md`.
+- The `PROJECT-RULES` section in `AGENTS.md` is filled; the safety sections are unchanged.
+- Context, policy, status and `.starter-kit/config` do not contradict each other.
+- Extensions are listed in `docs/INTEGRATIONS.md` or explicitly deferred.
 
-## Git и безопасность
+## Git and security
 
-- `.gitignore` исключает согласованные секретные пути; `.env.example` не исключён.
-- `.starter-kit/preflight.sh` выполняется без `STOP` (если Git инициализирован).
-- Видимость, `origin` и ветка согласованы или Git-действия явно заблокированы.
-- Крупные файлы перечислены до commit.
+- `.gitignore` excludes the agreed secret paths; `.env.example` is not excluded.
+- `.starter-kit/preflight.sh` runs without `STOP` (if Git is initialized).
+- Visibility, `origin` and branch are agreed, or Git actions are explicitly blocked.
+- Large files are listed before a commit.
 
-## Оценка передачи контекста (0–10)
+## Handoff score (0–10)
 
-Понятность цели; понятность границ; актуальность состояния; видимость решений; понятность следующего шага; безопасность; готовность Git; воспроизводимость расширений; возможность передачи новому агенту.
+Clarity of the goal; clarity of the boundaries; freshness of the state; visibility of decisions; clarity of the next step; safety; Git readiness; reproducibility of extensions; readiness for a new agent.
 
-## Отчёт
+## Report
 
-Оценки; уровень готовности (словарь в `docs/PROJECT_POLICY.md`); пробелы с критичностью; разрешённая работа; заблокированные действия; конкретные исправления.
+Scores; readiness level (glossary in `docs/PROJECT_POLICY.md`); gaps with severity; allowed work; blocked actions; concrete fixes.

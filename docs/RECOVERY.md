@@ -1,48 +1,48 @@
-# Резервирование и восстановление
+# Backup and recovery
 
-Как проект сохраняется и как продолжить работу после потери чата, смены агента или аккаунта, нового компьютера или долгого перерыва.
+How the project is preserved and how to continue after losing the chat, switching agent or account, a new computer or a long break.
 
-## Что сохраняет Git
+## What Git keeps
 
-Удалённый репозиторий сохраняет всё, что добавлено, закоммичено и отправлено: по политике проекта это все значимые данные, кроме секретов и файлов, для которых выбрано другое хранение. Git не хранит пустые папки, поэтому в рабочих каталогах лежат поясняющие `README.md`.
+The remote repository keeps everything that was added, committed and pushed: per the project policy, that is all meaningful data except secrets and files you chose to store elsewhere. Git does not keep empty folders, so working folders contain explanatory `README.md` files.
 
-## Что Git не сохраняет
+## What Git does not keep
 
-- Секреты из `.gitignore` — их значения хранятся в защищённом хранилище пользователя, карта — в `docs/SECRETS.md`.
-- Незакоммиченные изменения и неотправленные commits.
-- Файлы, которые пользователь решил хранить отдельно, и материалы за пределами корня проекта.
-- Установленные плагины, пользовательские и глобальные Skills, глобальные MCP-настройки, OAuth-сессии и токены — их восстановление описано в `docs/INTEGRATIONS.md`.
+- Secrets from `.gitignore` — their values live in the user's secure storage; the map is in `docs/SECRETS.md`.
+- Uncommitted changes and unpushed commits.
+- Files the user decided to store separately, and materials outside the project root.
+- Installed plugins, user and global Skills, global MCP settings, OAuth sessions and tokens — their recovery is described in `docs/INTEGRATIONS.md`.
 
-Вторая независимая копия (облако, внешний диск) подключается только по решению пользователя и описывается здесь после настройки.
+A second independent copy (cloud, external drive) is connected only by the user's decision and is described here once set up.
 
-## Порядок восстановления
+## Recovery order
 
-Запускается командой `ВОССТАНОВИТЬ` (`prompts/07-recovery.md`). Новый агент:
+Run with the `RECOVER` command (`prompts/07-recovery.md`). The new agent:
 
-1. Читает файлы в порядке раздела 2 `AGENTS.md`, включая `docs/INTEGRATIONS.md`, `docs/GIT_POLICY.md` и этот документ.
-2. Проверяет корень проекта, `git status`, ветку, последний commit и `origin`.
-3. Проверяет наличие обязательных файлов, не раскрывая секретов.
-4. Определяет, какие расширения требуют установки, доверия или авторизации.
-5. Составляет отчёт до любых изменений.
+1. Reads the files in the order of section 2 of `AGENTS.md`, including `docs/INTEGRATIONS.md`, `docs/GIT_POLICY.md` and this document.
+2. Checks the project root, `git status`, branch, last commit and `origin`.
+3. Checks that required files exist, without revealing secrets.
+4. Determines which extensions need installation, trust or authentication.
+5. Writes a report before making any changes.
 
-До готовности отчёта запрещено редактировать файлы, устанавливать зависимости, выполнять commit, push и внешние действия.
+Until the report is ready, editing files, installing dependencies, committing, pushing and external actions are forbidden.
 
-## Отчёт реконструкции
+## Reconstruction report
 
-- что это за проект, его цель и границы;
-- текущий этап, последний завершённый шаг и открытые задачи;
-- важные решения, риски и блокеры;
-- уровень готовности и отложенные решения;
-- Git-состояние;
-- состояние обязательных расширений;
-- первый безопасный следующий шаг.
+- what the project is, its goal and boundaries;
+- current stage, last completed step and open tasks;
+- important decisions, risks and blockers;
+- readiness level and deferred decisions;
+- Git state;
+- state of mandatory extensions;
+- the first safe next step.
 
-Отложенный вопрос сам по себе не ошибка: проверьте, что связанное действие заблокировано и указано событие повторного вопроса.
+A deferred question is not an error by itself: check that the related action is blocked and that the event to revisit it is recorded.
 
-## Проверка восстановления (recovery drill)
+## Recovery drill
 
-После первой настройки и крупных изменений структуры: клонировать репозиторий в отдельную папку, восстановить секреты безопасным способом, выполнить проверки из `docs/PROJECT_CONTEXT.md` и `docs/INTEGRATIONS.md`, попросить нового агента выполнить `ВОССТАНОВИТЬ`.
+After first setup and major structural changes: clone the repository into a separate folder, restore secrets safely, run the checks from `docs/PROJECT_CONTEXT.md` and `docs/INTEGRATIONS.md`, and ask a new agent to run `RECOVER`.
 
-Проверка успешна, если новый агент без старого чата объясняет проект, называет важные файлы и предлагает корректный следующий шаг.
+The drill succeeds if the new agent, without the old chat, explains the project, names the important files and proposes a correct next step.
 
-Последняя успешная проверка: не проводилась.
+Last successful drill: not performed.

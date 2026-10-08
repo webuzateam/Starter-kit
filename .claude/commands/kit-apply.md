@@ -1,5 +1,5 @@
 ---
-description: Применить итоговую сводку настройки (ПРИМЕНИТЬ)
+description: Apply the final setup summary (APPLY)
 ---
 
-Выполни команду `ПРИМЕНИТЬ`: раздел «После команды ПРИМЕНИТЬ» в `prompts/01-initialize-project.md`. Если итоговой сводки ещё не было, не применяй ничего и предложи `START`.
+Run the `APPLY` command: the "After the APPLY command" section of `prompts/01-initialize-project.md`. If there has been no final summary yet, apply nothing and suggest `START`.

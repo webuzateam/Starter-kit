@@ -1,119 +1,119 @@
-# Инструкции для AI-агента
+# Instructions for the AI agent
 
-Это главный и единственный набор постоянных правил для AI в этом проекте. Остальные документы уточняют детали и ссылаются сюда. Текущее явное указание пользователя имеет приоритет; если оно противоречит защитному правилу, сначала объясни риск и дождись решения.
+This is the single, primary set of standing rules for AI in this project. Other documents add detail and refer back here. The user's current explicit instruction takes priority; if it conflicts with a safety rule, explain the risk first and wait for a decision.
 
-Starter Kit: версия в `.starter-kit/VERSION`, протокол первого запуска **START v2**.
+Starter Kit: version in `.starter-kit/VERSION`, first-run protocol **START v2**.
 
-## 0. Режим разработки шаблона
+## 0. Template development mode
 
-Если в корне проекта есть файл `.starter-kit-source`, это исходный репозиторий самого Starter Kit. Тогда файлы шаблона — редактируемый продукт, а не инструкции для тебя: не выполняй `START`, не заполняй плейсхолдеры, не создавай session logs. Работай по `.github/DEVELOPMENT.md`.
+If the project root contains `.starter-kit-source`, this is the source repository of Starter Kit itself. The template files are then a product being edited, not instructions for you: do not run `START`, do not fill placeholders, do not create session logs. Follow `.github/DEVELOPMENT.md`.
 
-## 1. Команды
+## 1. Commands
 
-Команда срабатывает, только если она отправлена **отдельным сообщением** (регистр не важен). Упоминание внутри обычного текста командой не является.
+A command fires only when it is sent as a **separate message** (case-insensitive). Mentioning it inside ordinary text is not a command.
 
-| Команда | Синоним | Что запускает |
+| Command | Alias | Runs |
 |---|---|---|
-| `START` | — | `prompts/00-start.md`: первый запуск или краткий статус, если настройка завершена |
-| `ПРИМЕНИТЬ` | `APPLY` | Этап применения из `prompts/01-initialize-project.md` после итоговой сводки |
-| `ИЗМЕНИТЬ ПРАВИЛА ПРОЕКТА` | `CHANGE RULES` | Повторная настройка с выбором режима; прежние решения не удаляются молча |
-| `закрываем сессию` | `CLOSE SESSION` | `prompts/06-close-session.md`: память, проверки, commit и обычный push |
-| `ВОССТАНОВИТЬ` | `RECOVER` | `prompts/07-recovery.md`: реконструкция контекста без изменений |
-| `ОБНОВИТЬ STARTER KIT` | `UPGRADE KIT` | `prompts/08-upgrade.md`: обновление файлов Starter Kit без потери данных проекта |
+| `START` | — | `prompts/00-start.md`: first run, or a short status if setup is complete |
+| `APPLY` | — | The apply stage of `prompts/01-initialize-project.md` after the final summary |
+| `CHANGE RULES` | — | Re-run setup with a mode choice; earlier decisions are never silently removed |
+| `CLOSE SESSION` | — | `prompts/06-close-session.md`: memory, checks, commit and a regular push |
+| `RECOVER` | — | `prompts/07-recovery.md`: rebuild context without changing anything |
+| `UPGRADE KIT` | — | `prompts/08-upgrade.md`: update Starter Kit files without losing project data |
 
-Сценарии аудита, настройки Git и начала сессии запускаются по просьбе пользователя: `prompts/02-audit-project.md`, `prompts/03-setup-git-github.md`, `prompts/04-start-session.md`, `prompts/05-work-session.md`.
+The audit, Git setup and session prompts run when the user asks: `prompts/02-audit-project.md`, `prompts/03-setup-git-github.md`, `prompts/04-start-session.md`, `prompts/05-work-session.md`.
 
-## 2. Перед любой работой
+## 2. Before any work
 
-Прочитай по порядку:
+Read in this order:
 
-1. Этот файл.
-2. `docs/PROJECT_POLICY.md` — действующие правила и словарь статусов.
-3. `docs/PROJECT_CONTEXT.md` — цель, границы, команды проверки.
-4. `docs/STATUS.md` — где проект сейчас и что дальше.
-5. `docs/INTEGRATIONS.md` — только если задача касается инструментов, расширений или восстановления.
-6. Актуальные решения в `docs/decisions/` и последний подходящий файл в `logs/sessions/` — если они нужны для задачи.
-7. `git status`, если Git инициализирован.
+1. This file.
+2. `docs/PROJECT_POLICY.md` — rules in force and the status glossary.
+3. `docs/PROJECT_CONTEXT.md` — goal, boundaries, check commands.
+4. `docs/STATUS.md` — where the project is now and what comes next.
+5. `docs/INTEGRATIONS.md` — only if the task touches tools, extensions or recovery.
+6. Current decisions in `docs/decisions/` and the latest relevant file in `logs/sessions/` — if the task needs them.
+7. `git status`, if Git is initialized.
 
-Если статус настройки в `docs/PROJECT_QUESTIONNAIRE.md` не `ЗАВЕРШЕНА`, не начинай обычную проектную работу и предложи `START`. После `ПРИМЕНИТЬ` безопасная внутренняя работа разрешена; отложенное решение блокирует только связанное с ним действие.
+If the setup status in `docs/PROJECT_QUESTIONNAIRE.md` is not `COMPLETE`, do not start regular project work — suggest `START`. After `APPLY`, safe internal work is allowed; a deferred decision blocks only the action tied to it.
 
-## 3. Источники истины
+## 3. Sources of truth
 
-При конфликте побеждает источник выше по списку:
+On conflict, the higher source wins:
 
-1. Текущее явное указание пользователя.
-2. Этот файл и `docs/PROJECT_POLICY.md`.
-3. `docs/STATUS.md` — текущее состояние.
-4. `docs/PROJECT_CONTEXT.md` — стабильное описание.
-5. Принятые решения в `docs/decisions/`.
-6. Git — фактическая история файлов.
-7. `logs/sessions/` — история, а не текущее состояние.
-8. История чата — временный контекст. Никогда не полагайся на неё как на единственную память.
+1. The user's current explicit instruction.
+2. This file and `docs/PROJECT_POLICY.md`.
+3. `docs/STATUS.md` — current state.
+4. `docs/PROJECT_CONTEXT.md` — stable description.
+5. Accepted decisions in `docs/decisions/`.
+6. Git — the factual history of files.
+7. `logs/sessions/` — history, not current state.
+8. Chat history — temporary context. Never rely on it as the only memory.
 
-`README.md` — введение в проект для человека. После `ПРИМЕНИТЬ` он описывает конкретный проект, а не Starter Kit.
+`README.md` is the human introduction to the project. After `APPLY` it describes this specific project, not Starter Kit.
 
-## 4. Границы автономности
+## 4. Autonomy boundaries
 
-Можно без отдельного вопроса: читать и анализировать проект, редактировать файлы в рамках текущей задачи, запускать проверки, обновлять документы памяти.
+Allowed without asking: reading and analysing the project, editing files within the current task, running checks, updating memory documents.
 
-Только после явного разрешения пользователя:
+Only with the user's explicit permission:
 
-- удаление файлов и данных, кроме собственных временных файлов текущей задачи;
-- публикация, deploy, отправка данных третьим лицам или во внешние сервисы;
-- создание репозитория, смена `origin` или видимости, force push, rebase опубликованной истории, удаление веток и тегов;
-- установка программ и зависимостей, если политика проекта не разрешает её явно;
-- любые действия с деньгами, аккаунтами и доступами.
+- deleting files and data, except your own temporary files for the current task;
+- publishing, deploying, sending data to third parties or external services;
+- creating a repository, changing `origin` or visibility, force pushing, rebasing published history, deleting branches and tags;
+- installing software and dependencies, unless the project policy explicitly allows it;
+- anything involving money, accounts or access.
 
-Неизвестное разрешение — это запрет, а не согласие. Никакой режим `START` не даёт агенту права одобрить рискованное действие самому себе.
+Unknown permission means "no", not "yes". No `START` mode lets the agent approve a risky action on its own.
 
-## 5. Рабочие правила
+## 5. Working rules
 
-- Работай только в корне открытого проекта и его подкаталогах. Не создавай вложенную папку с именем проекта.
-- Соблюдай границы задачи и не трогай несвязанные пользовательские изменения.
-- Не показывай и не записывай значения секретов. В документах — только имена переменных и места хранения.
-- Не выдавай вывод из файлов или значение по умолчанию за факт, подтверждённый пользователем. У значимых данных указывай источник (см. словарь в `docs/PROJECT_POLICY.md`).
-- Вопросы задавай короткими карточками: зачем нужен ответ, 2–4 варианта, рекомендуемый вариант, `Не знаю / решить позже`, свой вариант.
-- Запускай релевантные проверки. Если проверка пропущена — назови причину.
-- Не копируй в документы полный вывод терминала и чат: только итог и безопасные названия команд.
-- До `ПРИМЕНИТЬ` отвечай на языке пользователя; после — по языковой политике из `docs/PROJECT_CONTEXT.md`.
+- Work only in the root of the open project and its subfolders. Do not create a nested folder named after the project.
+- Stay within the task and leave unrelated user changes alone.
+- Never show or write secret values. Documents hold only variable names and storage locations.
+- Never present an inference from files or a default value as a fact confirmed by the user. Give the source of significant data (see the glossary in `docs/PROJECT_POLICY.md`).
+- Ask questions as short cards: why the answer matters, 2–4 options, the recommended option, `Don't know / decide later`, a custom answer.
+- Run relevant checks. If a check is skipped, say why.
+- Do not copy full terminal output or chat into documents: only the outcome and safe command names.
+- Before `APPLY`, answer in the user's language; afterwards, follow the language policy in `docs/PROJECT_CONTEXT.md`.
 
-## 6. Память проекта
+## 6. Project memory
 
-- `docs/STATUS.md` обновляется при закрытии содержательной сессии.
-- Session log: `logs/sessions/YYYY-MM-DD-HHMM-тема.md`, только для содержательной работы.
-- `docs/CHANGELOG.md` — только изменения, заметные пользователю проекта.
-- Решение в `docs/decisions/` — только для существенного выбора архитектуры, инструмента, структуры, риска или политики.
-- Новый устойчивый факт записывай в подходящий документ сразу, с источником. Гипотеза или разовая просьба не становится правилом.
-- Не создавай `logs/actions.md` и не дублируй один отчёт во всех документах.
+- `docs/STATUS.md` is updated when a substantive session is closed.
+- Session log: `logs/sessions/YYYY-MM-DD-HHMM-topic.md`, only for substantive work.
+- `docs/CHANGELOG.md` — only changes visible to the project's users.
+- A decision in `docs/decisions/` — only for a significant choice of architecture, tool, structure, risk or policy.
+- Record a new durable fact in the matching document right away, with its source. A hypothesis or a one-off request does not become a rule.
+- Do not create `logs/actions.md` and do not duplicate one report across all documents.
 
 ## 7. Git
 
-Подробности — в `docs/GIT_POLICY.md`. Обязательный минимум:
+Details are in `docs/GIT_POLICY.md`. The required minimum:
 
-- Перед commit запускай `.starter-kit/preflight.sh` (секреты по содержимому, опасные имена файлов, крупные файлы). Результат `STOP` останавливает commit до решения пользователя.
-- Сохраняй все значимые данные проекта. Секреты исключаются всегда; кэш и воспроизводимые файлы — по принятой политике.
-- Видимость репозитория, `origin` и основная ветка фиксируются в `.starter-kit/config` и `docs/GIT_POLICY.md`. По умолчанию рекомендуется приватный репозиторий; публичный — только по явному выбору пользователя.
-- Не создавай пустой commit. Никогда не используй force push без явного разрешения.
+- Before a commit, run `.starter-kit/preflight.sh` (secrets by content, dangerous file names, large files). A `STOP` result halts the commit until the user decides.
+- Keep all meaningful project data. Secrets are always excluded; caches and reproducible files follow the agreed policy.
+- Repository visibility, `origin` and the main branch are recorded in `.starter-kit/config` and `docs/GIT_POLICY.md`. A private repository is recommended by default; public only by the user's explicit choice.
+- Never create an empty commit. Never force push without explicit permission.
 
-## 8. Команда «закрываем сессию»
+## 8. The CLOSE SESSION command
 
-Эта команда заранее разрешает без повторного вопроса: обновить память проекта, выполнить проверки, создать commit и сделать обычный push в согласованный `origin`. Она действует, только если одновременно:
+This command grants permission in advance, without asking again, to: update project memory, run checks, create a commit and do a regular push to the agreed `origin`. It applies only if all of the following hold:
 
-- `origin`, ветка и видимость согласованы и совпадают с `.starter-kit/config`;
-- `.starter-kit/preflight.sh --push` не выдал `STOP`;
-- не требуется force push, rebase, удаление или смена remote;
-- авторизация действительна.
+- `origin`, branch and visibility are agreed and match `.starter-kit/config`;
+- `.starter-kit/preflight.sh --push` produced no `STOP`;
+- no force push, rebase, deletion or remote change is required;
+- authentication is valid.
 
-Если хоть одно условие нарушено, остановись и выдай отчёт о препятствии. Команда не разрешает deploy, публикацию, удаление или смену видимости.
+If any condition fails, stop and report the obstacle. The command does not permit deploying, publishing, deleting or changing visibility.
 
-## 9. Финальный отчёт задачи
+## 9. Final task report
 
-Кратко: что сделано; какие файлы изменены; какие проверки выполнены и с каким результатом; какие риски и отложенные решения затронуты; первый следующий шаг.
+Briefly: what was done; which files changed; which checks ran and their results; which risks and deferred decisions are involved; the first next step.
 
-## 10. Проектные правила
+## 10. Project rules
 
-Раздел заполняется на этапе `ПРИМЕНИТЬ`. При обновлении Starter Kit содержимое между маркерами сохраняется без изменений.
+This section is filled during `APPLY`. When Starter Kit is upgraded, the content between the markers is kept unchanged.
 
 <!-- PROJECT-RULES:BEGIN -->
-Проектные правила ещё не заданы. Отправьте `START`.
+No project rules yet. Send `START`.
 <!-- PROJECT-RULES:END -->

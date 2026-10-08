@@ -1,212 +1,212 @@
-# Опрос первого запуска
+# First-run questionnaire
 
-Протокол: **START v2** — три режима: **с сопровождением**, **быстрый**, **без брифа**.
+Protocol: **START v2** — three modes: **guided**, **quick**, **no brief**.
 
-Статус настройки: **НЕ НАЧАТА**
+Setup status: **NOT STARTED**
 
-Выбранный режим: **НЕ ВЫБРАН**
+Selected mode: **NOT SELECTED**
 
-Этот файл — и опросник, и запись ответов первого запуска. Агент заполняет его после `START`, указывая источник каждого значимого ответа (словарь — в `docs/PROJECT_POLICY.md`). Значения секретов сюда не записываются.
+This file is both the questionnaire and the record of first-run answers. The agent fills it after `START`, giving the source of every significant answer (glossary in `docs/PROJECT_POLICY.md`). Secret values are never written here.
 
-## Как проходит настройка
+## How setup works
 
-- **С сопровождением (рекомендуется).** Агент проходит все 13 блоков. Вопросы без безопасного значения по умолчанию задаются карточками; блоки, где хватает рекомендаций, показываются одной сводкой «принять / изменить».
-- **Быстрый.** Агент задаёт только ключевые вопросы, отмеченные ★ (их 7), остальное заполняет безопасными значениями и показывает в итоговой сводке.
-- **Без брифа.** Агент изучает файлы без изменений, выводит факты с основанием, применяет безопасные значения и откладывает неизвестное. Вопрос задаётся только при противоречии, которое мешает безопасной настройке.
+- **Guided (recommended).** The agent goes through all 13 blocks. Questions without a safe default are asked as cards; blocks where the recommendations are enough are shown as one "accept / change" summary.
+- **Quick.** The agent asks only the key questions marked ★ (there are 7), fills the rest with safe values and shows them in the final summary.
+- **No brief.** The agent studies the files without changing them, records facts with their basis, applies safe values and defers the unknown. A question is asked only for a contradiction that prevents safe setup.
 
-Во всех режимах охват блока не означает, что пользователь обязан ответить на каждый вопрос: всегда можно выбрать `Не знаю / решить позже`. После охвата всех блоков агент показывает итоговую сводку и ждёт отдельной команды `ПРИМЕНИТЬ`.
+In every mode, covering a block does not mean the user must answer every question: `Don't know / decide later` is always available. Once all blocks are covered, the agent shows the final summary and waits for a separate `APPLY` command.
 
-## Прогресс
+## Progress
 
-| Блок | Статус | Без ответа пользователя |
+| Block | Status | Without the user's answer |
 |---|---|---|
-| 1. Паспорт проекта | Не начат | Рабочее описание по контексту, отмечено как `ВЫВЕДЕНО` |
-| 2. Языки | Не начат | Язык текущего обращения |
-| 3. Границы и структура | Не начат | Выводится из файлов |
-| 4. Технологии и проверки | Не начат | Выводится из файлов или откладывается |
-| 5. Источники истины | Не начат | Порядок из `AGENTS.md` |
-| 6. Поведение AI | Не начат | Самый строгий вариант |
-| 7. Документирование | Не начат | Стандартный уровень |
-| 8. Git и GitHub | Не начат | Git-действия заблокированы до решения |
-| 9. Секреты | Не начат | Базовый `.gitignore` + проверка содержимого |
-| 10. Крупные файлы | Не начат | Порог 50 MiB, решение за пользователем |
-| 11. Закрытие сессии | Не начат | Стандартные границы команды |
-| 12. Восстановление | Не начат | Стандартный порядок |
-| 13. Формат отчётов | Не начат | Стандартный отчёт |
+| 1. Project passport | Not started | Working description from context, marked `INFERRED` |
+| 2. Languages | Not started | Language of the current conversation |
+| 3. Boundaries and structure | Not started | Derived from files |
+| 4. Technologies and checks | Not started | Derived from files or deferred |
+| 5. Sources of truth | Not started | Order from `AGENTS.md` |
+| 6. AI behaviour | Not started | The strictest option |
+| 7. Documentation | Not started | Standard level |
+| 8. Git and GitHub | Not started | Git actions blocked until decided |
+| 9. Secrets | Not started | Base `.gitignore` + content check |
+| 10. Large files | Not started | 50 MiB threshold, the user decides |
+| 11. Closing a session | Not started | Standard command boundaries |
+| 12. Recovery | Not started | Standard order |
+| 13. Report format | Not started | Standard report |
 
-## Блок 1. Паспорт проекта
+## Block 1. Project passport
 
-Зачем: название, цель и аудитория помогают агенту отличать полезную работу от случайного расширения проекта. Агент сначала предлагает формулировки по контексту.
+Why: the name, goal and audience help the agent tell useful work from accidental scope creep. The agent first suggests wording based on context.
 
-1. ★ Как называется проект и что он делает (один абзац)?
-2. Какую проблему решает и какой конечный результат нужен?
-3. ★ Для кого проект и на каком он этапе: идея, прототип, разработка, эксплуатация, архив?
+1. ★ What is the project called and what does it do (one paragraph)?
+2. What problem does it solve and what end result is needed?
+3. ★ Who is it for, and what stage is it at: idea, prototype, development, operation, archive?
 
-### Зафиксированные данные
+### Recorded data
 
-Заполняется при `START`.
+Filled during `START`.
 
-## Блок 2. Языки и локализация
+## Block 2. Languages and localization
 
-Зачем: заранее выбранная схема предотвращает смешение языков и лишние переименования.
+Why: choosing a scheme early prevents mixed languages and needless renaming.
 
-1. ★ Основной язык интерфейса и материалов?
-2. Нужны ли другие языки сейчас или позже, и как хранить переводы?
-3. На каком языке код, комментарии и техническая документация?
+1. ★ Main language of the interface and materials?
+2. Are other languages needed now or later, and how should translations be stored?
+3. Which language for code, comments and technical documentation?
 
-По умолчанию: язык текущего обращения; название продукта, репозитория и пути без языковых суффиксов.
+Default: the language of the current conversation; product, repository and path names without language suffixes.
 
-### Зафиксированные данные
+### Recorded data
 
-Заполняется при `START`.
+Filled during `START`.
 
-## Блок 3. Границы и структура
+## Block 3. Boundaries and structure
 
-Зачем: границы защищают чужие файлы и показывают, где агент работает автономно.
+Why: boundaries protect other people's files and show where the agent works autonomously.
 
-1. Что входит в проект и что явно не входит?
-2. Есть ли важные материалы за пределами открытой папки?
-3. Где исходники, данные и результаты?
+1. What is in the project and what is explicitly out?
+2. Are there important materials outside the open folder?
+3. Where are sources, data and results?
 
-По умолчанию: Starter Kit лежит прямо в корне; работа — в `src/`, результаты — в `outputs/`; внешние материалы только описываются, но не копируются без разрешения.
+Default: Starter Kit sits directly in the root; work goes in `src/`, results in `outputs/`; external materials are described but not copied without permission.
 
-### Зафиксированные данные
+### Recorded data
 
-Заполняется при `START`.
+Filled during `START`.
 
-## Блок 4. Технологии, расширения и проверки
+## Block 4. Technologies, extensions and checks
 
-Зачем: определяет инструменты, способ запуска и наблюдаемый критерий «задача готова».
+Why: defines the tools, how to run things and the observable criterion of "task done".
 
-1. ★ Тип проекта, технологии и команды запуска/проверки (тесты, сборка, линтер)?
-2. Нужны ли Skills, плагины или MCP-серверы; какие обязательны после clone?
-3. Что означает «задача завершена»?
+1. ★ Project type, technologies and run/check commands (tests, build, linter)?
+2. Are Skills, plugins or MCP servers needed; which are mandatory after a clone?
+3. What does "task complete" mean?
 
-По умолчанию: обязательных расширений нет; критерии завершения — из `docs/PROJECT_CONTEXT.md`.
+Default: no mandatory extensions; completion criteria from `docs/PROJECT_CONTEXT.md`.
 
-### Зафиксированные данные
+### Recorded data
 
-Заполняется при `START`.
+Filled during `START`.
 
-## Блок 5. Источники истины
+## Block 5. Sources of truth
 
-Зачем: единый порядок не даёт устаревшему чату или логу перезаписать актуальное состояние.
+Why: a single order stops an outdated chat or log from overriding the current state of the project.
 
-Подтвердите или измените порядок из раздела 3 `AGENTS.md`.
+Confirm or change the order in section 3 of `AGENTS.md`.
 
-### Зафиксированные данные
+### Recorded data
 
-Заполняется при `START`.
+Filled during `START`.
 
-## Блок 6. Поведение AI
+## Block 6. AI behaviour
 
-Зачем: задаёт границы автономности. Без ответа действует самый строгий вариант.
+Why: sets autonomy boundaries. Without an answer the strictest option applies.
 
-1. ★ Есть ли действия или зоны проекта, которые агенту трогать нельзя или только с подтверждением?
-2. Можно ли устанавливать программы и зависимости без вопроса?
+1. ★ Are there actions or areas of the project the agent must not touch, or only with confirmation?
+2. May software and dependencies be installed without asking?
 
-По умолчанию: чтение, анализ, правки по задаче и проверки — разрешены; всё из раздела 4 `AGENTS.md` — только с разрешения; установка — только с разрешения.
+Default: reading, analysis, task edits and checks — allowed; everything in section 4 of `AGENTS.md` — only with permission; installing — only with permission.
 
-### Зафиксированные данные
+### Recorded data
 
-Заполняется при `START`.
+Filled during `START`.
 
-## Блок 7. Документирование
+## Block 7. Documentation
 
-Зачем: сохраняет решения и состояние, не превращая память в копию чата.
+Why: keeps decisions and state without turning memory into a copy of the chat.
 
-1. Уровень session logs: краткий, стандартный или подробный?
-2. Когда обновлять changelog и создавать решения?
+1. Session log level: brief, standard or detailed?
+2. When to update the changelog and create decisions?
 
-По умолчанию: стандартный лог (запрос, результат, файлы, проверки, решения, риски, следующий шаг); changelog — только для пользовательских изменений; решение — только для существенного выбора.
+Default: standard log (request, result, files, checks, decisions, risks, next step); changelog — only user-visible changes; a decision — only for a significant choice.
 
-### Зафиксированные данные
+### Recorded data
 
-Заполняется при `START`.
+Filled during `START`.
 
-## Блок 8. Git и GitHub
+## Block 8. Git and GitHub
 
-Зачем: Git должен сохранять проект без утечки секретов и без отправки не туда. Неизвестные параметры не мешают внутренней работе, но блокируют Git-действия.
+Why: Git should keep the project without leaking secrets or pushing to the wrong place. Unknown parameters do not stop internal work but block Git actions.
 
-1. ★ Новый или существующий репозиторий? Видимость: **приватный (рекомендуется)** или публичный?
-2. Владелец и имя репозитория, основная ветка?
-3. Что делать с кэшем, сборками и зависимостями (`node_modules`, `.venv`, `dist` и т. п.)?
-4. Командный или личный проект: блокировать commit при упавших проверках?
-5. Подключить Git-hook `pre-commit`, который автоматически запускает `.starter-kit/preflight.sh`?
+1. ★ New or existing repository? Visibility: **private (recommended)** or public?
+2. Owner and repository name, main branch?
+3. What to do with caches, builds and dependencies (`node_modules`, `.venv`, `dist`, etc.)?
+4. Team or personal project: block commits when checks fail?
+5. Enable the `pre-commit` Git hook that runs `.starter-kit/preflight.sh` automatically?
 
-По умолчанию: один приватный репозиторий; ветка `main`; системный мусор исключён; воспроизводимые зависимости исключаются только по подтверждённому решению; в личном проекте состояние сохраняется даже при ошибке проверки, но ошибка явно фиксируется.
+Default: one private repository; branch `main`; system junk excluded; reproducible dependencies excluded only by confirmed decision; in a personal project state is saved even if a check fails, but the failure is recorded explicitly.
 
-Публичный репозиторий: перед первым push агент дополнительно проверяет всю историю и файлы на секреты и персональные данные, а пользователь отдельно подтверждает публикацию.
+Public repository: before the first push the agent additionally checks the whole history and all files for secrets and personal data, and the user confirms publication separately.
 
-### Зафиксированные данные
+### Recorded data
 
-Заполняется при `START`.
+Filled during `START`.
 
-## Блок 9. Секреты
+## Block 9. Secrets
 
-Зачем: секреты бывают не только в `.env`, поэтому нужны и карта путей, и проверка содержимого. Значения секретов никогда не запрашиваются.
+Why: secrets live not only in `.env`, so both a path map and a content check are needed. Secret values are never requested.
 
-1. ★ Где лежат файлы с секретами (`.env`, ключи, credentials, service accounts)?
-2. Где вы храните сами значения для восстановления (менеджер паролей, хранилище команды)?
+1. ★ Where are files with secrets (`.env`, keys, credentials, service accounts)?
+2. Where do you keep the values themselves for recovery (password manager, team vault)?
 
-По умолчанию: базовый `.gitignore` Starter Kit и проверка содержимого перед каждым commit.
+Default: the base Starter Kit `.gitignore` and a content check before every commit.
 
-### Зафиксированные данные
+### Recorded data
 
-Заполняется при `START`.
+Filled during `START`.
 
-## Блок 10. Крупные файлы
+## Block 10. Large files
 
-Зачем: большие бинарные файлы могут сорвать push. GitHub отклоняет файлы больше 100 MiB.
+Why: large binaries can break a push. GitHub rejects files larger than 100 MiB.
 
-1. Есть ли базы, архивы, видео, модели и т. п.? Какой порог предупреждения?
-2. Допустимы ли Git LFS или внешнее хранилище?
+1. Are there databases, archives, videos, models, etc.? What warning threshold?
+2. Are Git LFS or external storage acceptable?
 
-По умолчанию: порог 50 MiB; Git LFS не включается и файлы не исключаются автоматически; решение — за пользователем.
+Default: 50 MiB threshold; Git LFS is not enabled and files are not excluded automatically; the user decides.
 
-### Зафиксированные данные
+### Recorded data
 
-Заполняется при `START`.
+Filled during `START`.
 
-## Блок 11. Закрытие сессии
+## Block 11. Closing a session
 
-Зачем: команда `закрываем сессию` должна давать точное и ограниченное разрешение.
+Why: `CLOSE SESSION` must grant a precise, limited permission.
 
-Подтвердите границы из раздела 8 `AGENTS.md`: память, проверки, commit и обычный push в согласованный `origin` — без повторного вопроса; deploy, публикация, удаление, force push, смена remote или видимости — никогда.
+Confirm the boundaries in section 8 of `AGENTS.md`: memory, checks, commit and a regular push to the agreed `origin` — without asking again; deploying, publishing, deleting, force pushing, changing the remote or visibility — never.
 
-### Зафиксированные данные
+### Recorded data
 
-Заполняется при `START`.
+Filled during `START`.
 
-## Блок 12. Восстановление
+## Block 12. Recovery
 
-Зачем: новый агент или компьютер должен восстановить работу без старого чата.
+Why: a new agent or computer must be able to resume work without the old chat.
 
-1. Какие материалы критичны для восстановления, кроме Git?
-2. Кто подтверждает продолжение работы после реконструкции?
+1. Which materials, besides Git, are critical for recovery?
+2. Who confirms that work continues after reconstruction?
 
-По умолчанию: порядок из `docs/RECOVERY.md`; проверка восстановления после крупных изменений структуры.
+Default: the order in `docs/RECOVERY.md`; a recovery check after major structural changes.
 
-### Зафиксированные данные
+### Recorded data
 
-Заполняется при `START`.
+Filled during `START`.
 
-## Блок 13. Формат отчётов
+## Block 13. Report format
 
-Зачем: единый отчёт помогает быстро проверить результат.
+Why: a uniform report makes results quick to verify.
 
-1. Краткий или подробный отчёт? Показывать commit, ветку и remote?
+1. Brief or detailed report? Show commit, branch and remote?
 
-По умолчанию: стандартный отчёт из раздела 9 `AGENTS.md`.
+Default: the standard report from section 9 of `AGENTS.md`.
 
-### Зафиксированные данные
+### Recorded data
 
-Заполняется при `START`.
+Filled during `START`.
 
-## Итоговая сводка
+## Final summary
 
-Формируется после охвата всех блоков: режим START, паспорт проекта с источниками, принятые и изменённые правила, отложенные решения, заблокированные действия, предварительный уровень готовности, список файлов, которые будут заполнены.
+Formed once all blocks are covered: START mode, project passport with sources, accepted and changed rules, deferred decisions, blocked actions, preliminary readiness level, list of files to be filled.
 
-## Отложенные решения и контрольные точки
+## Deferred decisions and checkpoints
 
-Заполняется при `START`. Для каждого пункта: что неизвестно; почему отложено; какая работа разрешена; какое действие заблокировано; при каком событии вернуться к вопросу.
+Filled during `START`. For each item: what is unknown; why it is deferred; which work is allowed; which action is blocked; on what event to revisit the question.

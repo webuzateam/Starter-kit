@@ -1,130 +1,130 @@
-# Как это работает — объяснение для новичка
+# How it works — an explanation for beginners
 
-Этот документ объясняет AI Project Starter Kit простыми словами. Никаких знаний программирования не нужно.
+This document explains AI Project Starter Kit in plain words. No programming knowledge is needed.
 
-## Проблема, которую он решает
+## The problem it solves
 
-Когда вы работаете над проектом с AI-помощником (ChatGPT, Claude, Codex, Cursor и другими), вся договорённость живёт **в окне чата**: что делаем, какие решения приняли, что уже готово, что дальше.
+When you work on a project with an AI assistant (ChatGPT, Claude, Codex, Cursor and others), every agreement lives **in the chat window**: what we are building, which decisions were made, what is done, what comes next.
 
-А чат — ненадёжное место:
+And a chat is an unreliable place:
 
-- он заканчивается или «забывает» начало, когда становится слишком длинным;
-- его можно случайно закрыть или потерять;
-- новый чат, другой AI или другой аккаунт ничего о проекте не знают;
-- через месяц вы сами не вспомните, почему сделали именно так.
+- it ends, or "forgets" the beginning when it gets too long;
+- it can be closed or lost by accident;
+- a new chat, another AI or another account knows nothing about the project;
+- a month later you won't remember why you did things a certain way.
 
-В итоге каждый раз приходится объяснять всё заново, а AI иногда «додумывает» то, чего не было.
+So you have to explain everything again and again, and the AI sometimes "fills in" things that never happened.
 
-## Идея одним предложением
+## The idea in one sentence
 
-**Память проекта хранится не в чате, а в обычных файлах внутри папки проекта.** Любой AI-помощник читает эти файлы и сразу понимает, где вы остановились.
+**The project's memory lives not in the chat but in ordinary files inside the project folder.** Any AI assistant reads these files and immediately understands where you stopped.
 
-## Аналогия: бортовой журнал
+## An analogy: the ship's log
 
-Представьте корабль, на котором меняются капитаны. Каждый новый капитан не знает, что было до него. Но на мостике лежит **бортовой журнал**: курс, правила, важные события, где корабль сейчас и куда идёт дальше. Новый капитан открывает журнал — и через пять минут ведёт корабль дальше.
+Picture a ship whose captains keep changing. Each new captain knows nothing of what happened before. But on the bridge lies a **ship's log**: the course, the rules, important events, where the ship is now and where it is going next. The new captain opens the log and five minutes later is steering the ship onward.
 
-Starter Kit — это такой бортовой журнал для вашего проекта, а AI-помощники — сменяющиеся капитаны.
+Starter Kit is that ship's log for your project, and AI assistants are the changing captains.
 
-## Что лежит в папке
+## What's in the folder
 
 ```text
-мой-проект/
-├── README.md        ← «обложка»: что это за проект (для людей)
-├── AGENTS.md        ← правила для AI: что можно, что нельзя
-├── docs/            ← память проекта
-│   ├── PROJECT_CONTEXT.md   цель, для кого, границы — «паспорт»
-│   ├── STATUS.md            где мы сейчас и что дальше — «закладка»
-│   ├── PROJECT_POLICY.md    принятые правила работы
-│   ├── decisions/           почему приняли важные решения
-│   └── …                    Git, секреты, восстановление
-├── logs/sessions/   ← краткий дневник рабочих сессий
-├── prompts/         ← готовые сценарии для AI (старт, закрытие, восстановление)
-├── src/             ← ваша основная работа: код, тексты, данные
-└── outputs/         ← готовые результаты: документы, картинки, сборки
+my-project/
+├── README.md        ← the "cover": what this project is (for people)
+├── AGENTS.md        ← rules for the AI: what is allowed, what is not
+├── docs/            ← the project's memory
+│   ├── PROJECT_CONTEXT.md   goal, audience, boundaries — the "passport"
+│   ├── STATUS.md            where we are and what's next — the "bookmark"
+│   ├── PROJECT_POLICY.md    agreed working rules
+│   ├── decisions/           why important decisions were made
+│   └── …                    Git, secrets, recovery
+├── logs/sessions/   ← a short diary of work sessions
+├── prompts/         ← ready-made flows for the AI (start, close, recover)
+├── src/             ← your main work: code, texts, data
+└── outputs/         ← finished results: documents, images, builds
 ```
 
-Самые важные файлы — всего три:
+The most important files are just three:
 
-| Файл | На какой вопрос отвечает |
+| File | Answers the question |
 |---|---|
-| `AGENTS.md` | «Как здесь принято работать и что запрещено?» |
-| `docs/PROJECT_CONTEXT.md` | «Что мы делаем и зачем?» |
-| `docs/STATUS.md` | «Где мы остановились и что делать дальше?» |
+| `AGENTS.md` | "How do we work here and what is forbidden?" |
+| `docs/PROJECT_CONTEXT.md` | "What are we building and why?" |
+| `docs/STATUS.md` | "Where did we stop and what's next?" |
 
-## Как пользоваться: пять шагов
+## How to use it: five steps
 
-### 1. Скопируйте Starter Kit в папку проекта
+### 1. Copy Starter Kit into your project folder
 
-Файлы должны лежать прямо в корне папки, без лишней вложенной папки.
+The files must sit directly in the folder's root, without an extra nested folder.
 
-### 2. Откройте папку в AI-помощнике и напишите `START`
+### 2. Open the folder in your AI assistant and type `START`
 
-Одно слово, отдельным сообщением. AI коротко расскажет, что это за система, и предложит выбрать режим настройки:
+One word, as a separate message. The AI briefly explains the system and offers a setup mode:
 
-- **С сопровождением** (рекомендуется) — AI задаёт понятные вопросы с вариантами ответов, как в тесте. На любой вопрос можно ответить «не знаю, решим позже».
-- **Быстрый** — всего 7 главных вопросов, остальное заполняется безопасными настройками.
-- **Без брифа** — AI сам изучает папку и предлагает настройки. Удобно, если проект уже существует.
+- **Guided** (recommended) — the AI asks clear questions with answer options, like a quiz. You can answer any question with "don't know, decide later".
+- **Quick** — only 7 key questions; the rest is filled with safe settings.
+- **No brief** — the AI studies the folder itself and proposes settings. Handy if the project already exists.
 
-### 3. Проверьте сводку и напишите `ПРИМЕНИТЬ`
+### 3. Check the summary and type `APPLY`
 
-AI покажет итог: что он понял о проекте и какие правила предлагает. Пока вы не написали `ПРИМЕНИТЬ`, ничего не меняется. После команды AI заполнит файлы памяти, и проект готов к работе.
+The AI shows the result: what it understood about the project and which rules it proposes. Nothing changes until you type `APPLY`. After that, the AI fills the memory files and the project is ready to work.
 
-### 4. Работайте как обычно
+### 4. Work as usual
 
-Просто давайте AI задачи. Он сам читает файлы памяти перед работой и дописывает в них важное: новые решения, договорённости, изменения.
+Just give the AI tasks. It reads the memory files before working and adds the important things to them: new decisions, agreements, changes.
 
-### 5. В конце работы напишите `закрываем сессию`
+### 5. At the end, type `CLOSE SESSION`
 
-AI обновит «закладку» (`STATUS.md`), запишет краткий итог в дневник, проверит, что в сохранение не попали пароли и слишком большие файлы, и сохранит всё в Git (если он настроен).
+The AI updates the "bookmark" (`STATUS.md`), writes a short entry in the diary, checks that no passwords or oversized files slipped into the save, and saves everything to Git (if it is set up).
 
-В следующий раз — даже в новом чате или с другим AI — работа продолжится с того же места.
+Next time — even in a new chat or with another AI — work continues from the same place.
 
-## Главные команды
+## The main commands
 
-| Команда | Когда писать | Что произойдёт |
+| Command | When to type it | What happens |
 |---|---|---|
-| `START` | Первый раз или чтобы узнать статус | Настройка или короткая справка о проекте |
-| `ПРИМЕНИТЬ` | После сводки настройки | AI записывает настройки в файлы |
-| `закрываем сессию` | В конце работы | Обновление памяти, проверки и сохранение в Git |
-| `ВОССТАНОВИТЬ` | Новый чат, другой AI, долгий перерыв | AI читает файлы и рассказывает, где проект остановился |
+| `START` | The first time, or to see the status | Setup or a short project summary |
+| `APPLY` | After the setup summary | The AI writes the settings into the files |
+| `CLOSE SESSION` | At the end of work | Memory update, checks and saving to Git |
+| `RECOVER` | New chat, another AI, a long break | The AI reads the files and tells you where the project stopped |
 
-Команда срабатывает, только если она написана **отдельным сообщением**. Можно писать и по-английски: `APPLY`, `CLOSE SESSION`, `RECOVER`.
+A command fires only when written **as a separate message**.
 
-## Что такое Git и зачем он здесь
+## What Git is and why it's here
 
-**Git** — это «машина времени» для папки: он запоминает каждую сохранённую версию файлов. **GitHub** — сайт, где эта история хранится в интернете. Если компьютер сломается, проект можно скачать обратно со всей историей.
+**Git** is a "time machine" for a folder: it remembers every saved version of the files. **GitHub** is a website where that history is stored online. If your computer breaks, you can download the project back with its full history.
 
-Starter Kit настраивает Git так, чтобы:
+Starter Kit sets Git up so that:
 
-- сохранялось всё важное: тексты, код, документы, результаты;
-- **никогда не сохранялись пароли и ключи** — они остаются только у вас;
-- по умолчанию репозиторий был **приватным**, то есть видимым только вам. Сделать его публичным можно, но только по вашему явному решению.
+- everything important is saved: texts, code, documents, results;
+- **passwords and keys are never saved** — they stay only with you;
+- the repository is **private** by default, i.e. visible only to you. You can make it public, but only by your explicit decision.
 
-Если Git вам пока не нужен — ничего страшного: память в файлах работает и без него.
+If you don't need Git yet, that's fine: memory in files works without it.
 
-## Как AI защищён от ошибок
+## How the AI is protected from mistakes
 
-AI может многое делать сам, но некоторые действия **всегда** требуют вашего «да»:
+The AI can do a lot on its own, but some actions **always** require your "yes":
 
-- удалить файлы;
-- опубликовать что-то или отправить данные куда-то наружу;
-- изменить место хранения проекта на GitHub или сделать его публичным;
-- переписать историю изменений.
+- deleting files;
+- publishing anything or sending data outside;
+- changing where the project is stored on GitHub or making it public;
+- rewriting the history of changes.
 
-Перед каждым сохранением в Git запускается автоматическая проверка (`.starter-kit/preflight.sh`). Она ищет пароли и ключи, слишком большие файлы и проверяет, что сохранение уходит туда, куда вы договорились. Если что-то не так, сохранение останавливается, и AI спрашивает вас.
+Before every save to Git, an automatic check runs (`.starter-kit/preflight.sh`). It looks for passwords and keys and for oversized files, and checks that the save goes where you agreed. If something is wrong, the save stops and the AI asks you.
 
-Если AI чего-то не знает, он не придумывает, а помечает: «это я вывел сам», «это значение по умолчанию» или «это отложено до вашего решения».
+When the AI doesn't know something, it doesn't make it up but marks it: "I inferred this", "this is a default value" or "this is deferred until you decide".
 
-## Частые вопросы
+## FAQ
 
-**Нужно ли уметь программировать?** Нет. Starter Kit подходит для любых проектов: кода, текстов, исследований, дизайна, бизнес-задач.
+**Do I need to know how to code?** No. Starter Kit works for any project: code, texts, research, design, business tasks.
 
-**С каким AI это работает?** С любым помощником, который умеет читать файлы в папке проекта: Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI и другими. `AGENTS.md` — общепринятое имя файла с инструкциями для AI.
+**Which AI does it work with?** Any assistant that can read files in the project folder: Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI and others. `AGENTS.md` is the common file name for AI instructions.
 
-**Что делать, если чат пропал?** Откройте папку в новом чате (или в другом AI) и напишите `ВОССТАНОВИТЬ`.
+**What if the chat is gone?** Open the folder in a new chat (or another AI) and type `RECOVER`.
 
-**Можно ли изменить правила позже?** Да: команда `ИЗМЕНИТЬ ПРАВИЛА ПРОЕКТА`.
+**Can I change the rules later?** Yes: the `CHANGE RULES` command.
 
-**Как обновить Starter Kit, когда выйдет новая версия?** Команда `ОБНОВИТЬ STARTER KIT`. Ваши данные проекта не перезаписываются.
+**How do I update Starter Kit when a new version comes out?** The `UPGRADE KIT` command. Your project data is not overwritten.
 
-**Где почитать подробнее?** Правила для AI — `AGENTS.md`; полная инструкция — на сайте проекта: https://webuza-ai-starter-kit.pages.dev/guide/
+**Where can I see a filled example?** On the website: https://webuza-ai-starter-kit.pages.dev/en/example/ — the full guide is at https://webuza-ai-starter-kit.pages.dev/en/guide/

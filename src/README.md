@@ -1,5 +1,5 @@
-# Рабочие материалы
+# Working materials
 
-В этой папке по умолчанию находятся исходники, тексты, данные или другие основные материалы проекта. Во время `START` пользователь может выбрать другую структуру.
+By default this folder holds the project's sources, texts, data or other main materials. During `START` the user can choose a different structure.
 
-Файл также сохраняет каталог в Git до появления рабочих материалов.
+The file also keeps the folder in Git until working materials appear.

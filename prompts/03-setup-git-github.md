@@ -1,50 +1,50 @@
-# Настройка Git и GitHub
+# Git and GitHub setup
 
-Выполняется только после `ПРИМЕНИТЬ`. Правила — `docs/GIT_POLICY.md`.
+Runs only after `APPLY`. Rules — `docs/GIT_POLICY.md`.
 
-## 1. Проверки до изменений
+## 1. Checks before changing anything
 
-1. Фактический корень; нет лишней вложенной папки; нет репозитория выше по дереву.
-2. Существующие remotes и ветки.
-3. Установлены ли Git и GitHub CLI, есть ли авторизация (`gh auth status`).
-4. Имя и email автора; для нового проекта — локальная настройка репозитория.
-5. `README.md` уже описывает проект, а не Starter Kit. Иначе — стоп: инициализация не завершена.
-6. `.gitignore`, секретные пути, политика кэша и зависимостей.
+1. The actual root; no extra nested folder; no repository higher up the tree.
+2. Existing remotes and branches.
+3. Whether Git and GitHub CLI are installed and authenticated (`gh auth status`).
+4. Author name and email; for a new project — local repository settings.
+5. `README.md` already describes the project, not Starter Kit. Otherwise — stop: setup is not finished.
+6. `.gitignore`, secret paths, the policy for caches and dependencies.
 
-Если репозиторий, remote, структура или разрешение неоднозначны — остановись и покажи варианты с рекомендацией. Если нет Git или `gh` — объясни установку и спроси разрешение. Авторизация — только через браузер (`gh auth login`); токены и пароли в чате не запрашиваются.
+If the repository, remote, structure or permission is ambiguous — stop and show options with a recommendation. If Git or `gh` is missing — explain how to install and ask for permission. Authentication only via the browser (`gh auth login`); tokens and passwords are never requested in chat.
 
-## 2. Согласуй параметры
+## 2. Agree on the parameters
 
-Покажи сводку и получи явное подтверждение:
+Show a summary and get explicit confirmation:
 
-- владелец и имя репозитория (предложи по названию проекта);
-- видимость: приватный (рекомендуется) или публичный;
-- основная ветка (по умолчанию `main`);
-- подключать ли hook `pre-commit` (рекомендуется).
+- owner and repository name (suggest one based on the project name);
+- visibility: private (recommended) or public;
+- main branch (`main` by default);
+- whether to enable the `pre-commit` hook (recommended).
 
-Для публичного репозитория дополнительно предупреди: всё содержимое и вся история станут видны всем. Перед первым push проверь все файлы, а не только изменённые, на секреты и персональные данные.
+For a public repository, also warn that all content and the whole history become visible to everyone. Before the first push, check all files — not only changed ones — for secrets and personal data.
 
-Запиши согласованные значения в `.starter-kit/config` и `docs/GIT_POLICY.md`.
+Write the agreed values into `.starter-kit/config` and `docs/GIT_POLICY.md`.
 
-## 3. Локальный репозиторий
+## 3. Local repository
 
-1. `git init -b <ветка>` прямо в корне.
-2. Если согласован hook: `chmod +x .starter-kit/preflight.sh .starter-kit/hooks/pre-commit` и `git config core.hooksPath .starter-kit/hooks`.
-3. `.starter-kit/preflight.sh` — при `STOP` остановись и покажи пути (без значений).
-4. Добавь все значимые файлы по политике, покажи staged-состав, создай первый commit.
+1. `git init -b <branch>` directly in the root.
+2. If the hook was agreed: `chmod +x .starter-kit/preflight.sh .starter-kit/hooks/pre-commit` and `git config core.hooksPath .starter-kit/hooks`.
+3. `.starter-kit/preflight.sh` — on `STOP`, stop and show the paths (without values).
+4. Add all meaningful files per the policy, show the staged set, create the first commit.
 
 ## 4. GitHub
 
-После подтверждения:
+After confirmation:
 
-1. Создай отдельный репозиторий с согласованной видимостью (`gh repo create <owner>/<name> --private|--public --source . --remote origin`).
-2. Запиши URL `origin` в `.starter-kit/config`.
+1. Create a separate repository with the agreed visibility (`gh repo create <owner>/<name> --private|--public --source . --remote origin`).
+2. Write the `origin` URL into `.starter-kit/config`.
 3. `.starter-kit/preflight.sh --push`.
-4. Обычный push основной ветки.
-5. Проверь видимость, ветку, remote, commit и чистоту дерева.
+4. A regular push of the main branch.
+5. Check visibility, branch, remote, commit and a clean tree.
 
-Не используй force push и не перезаписывай существующий remote.
+Never force push and never overwrite an existing remote.
 
-## 5. Отчёт
+## 5. Report
 
-Корень; владелец, имя и видимость репозитория; ветка; remote; commit; результат push; результат preflight; hook; что осталось вне Git.
+Root; owner, name and visibility of the repository; branch; remote; commit; push result; preflight result; hook; what stayed outside Git.

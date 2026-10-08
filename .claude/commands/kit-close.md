@@ -1,5 +1,5 @@
 ---
-description: Закрыть сессию: память, проверки, commit и push
+description: Close the session: memory, checks, commit and push
 ---
 
-Выполни команду `закрываем сессию` по `prompts/06-close-session.md` в границах раздела 8 `AGENTS.md`.
+Run the `CLOSE SESSION` command per `prompts/06-close-session.md` within the boundaries of section 8 of `AGENTS.md`.

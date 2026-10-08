@@ -1,5 +1,5 @@
 ---
-description: Обновить Starter Kit без потери данных проекта
+description: Upgrade Starter Kit without losing project data
 ---
 
-Выполни команду `ОБНОВИТЬ STARTER KIT` по `prompts/08-upgrade.md`.
+Run the `UPGRADE KIT` command per `prompts/08-upgrade.md`.

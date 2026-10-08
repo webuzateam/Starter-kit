@@ -1,9 +1,9 @@
-# История изменений проекта
+# Project changelog
 
-Только изменения, заметные пользователям проекта. Технические подробности — в Git и session logs.
+Only changes visible to the project's users. Technical details live in Git and session logs.
 
-Формат: [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/). Разделы версии: «Добавлено», «Изменено», «Исправлено», «Удалено».
+Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Version sections: "Added", "Changed", "Fixed", "Removed".
 
-## [Не выпущено]
+## [Unreleased]
 
-Записи появятся после начала работы над проектом.
+Entries will appear once work on the project begins.

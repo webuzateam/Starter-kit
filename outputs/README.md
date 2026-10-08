@@ -1,5 +1,5 @@
-# Результаты проекта
+# Project results
 
-Здесь по умолчанию хранятся созданные документы, изображения, сборки и другие готовые артефакты. По принятой политике результаты сохраняются в Git, если пользователь явно не решил иначе из-за секретности или размера.
+By default this is where created documents, images, builds and other finished artifacts are kept. Per the agreed policy, results are saved in Git unless the user explicitly decides otherwise for secrecy or size reasons.
 
-Файл также сохраняет каталог в Git до появления результатов.
+The file also keeps the folder in Git until results appear.

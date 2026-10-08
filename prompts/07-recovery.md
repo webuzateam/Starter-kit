@@ -1,7 +1,7 @@
-# Восстановление контекста
+# Recovering context
 
-Запускается командой `ВОССТАНОВИТЬ` (`RECOVER`) — после потери чата, смены агента или аккаунта, нового clone или долгого перерыва.
+Runs on the `RECOVER` command — after losing the chat, switching agent or account, a new clone or a long break.
 
-Восстанови контекст только по локальным файлам, следуя разделу «Порядок восстановления» в `docs/RECOVERY.md`, и выдай отчёт реконструкции оттуда же. Дополнительно укажи версию Starter Kit из `.starter-kit/VERSION`.
+Rebuild context only from local files, following the "Recovery order" section of `docs/RECOVERY.md`, and produce the reconstruction report described there. Also state the Starter Kit version from `.starter-kit/VERSION`.
 
-Не редактируй файлы, не устанавливай зависимости и не выполняй внешние действия, пока отчёт не готов и пользователь не подтвердил продолжение.
+Do not edit files, install dependencies or take external actions until the report is ready and the user has confirmed to continue.

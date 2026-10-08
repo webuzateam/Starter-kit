@@ -1,14 +1,14 @@
-# Начало рабочей сессии
+# Starting a work session
 
-Только после `ПРИМЕНИТЬ`. Отложенные решения не мешают работе, если ни одно не блокирует текущую задачу.
+Only after `APPLY`. Deferred decisions do not get in the way if none of them blocks the current task.
 
-Прочитай файлы в порядке раздела 2 `AGENTS.md` и ответь кратко:
+Read the files in the order of section 2 of `AGENTS.md` and answer briefly:
 
-- что это за проект;
-- текущий этап и последний завершённый шаг;
-- активные правила и ограничения;
-- уровень готовности и только те отложенные решения, которые относятся к ожидаемой работе;
-- риски и блокеры;
-- первый безопасный следующий шаг.
+- what the project is;
+- the current stage and the last completed step;
+- the rules and constraints in force;
+- the readiness level and only those deferred decisions that relate to the expected work;
+- risks and blockers;
+- the first safe next step.
 
-До получения задачи ничего не меняй.
+Change nothing until you get a task.

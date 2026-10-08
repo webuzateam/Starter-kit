@@ -1,33 +1,33 @@
-# Сессия — YYYY-MM-DD HH:MM — краткая тема
+# Session — YYYY-MM-DD HH:MM — short topic
 
-## Запрос
+## Request
 
-Кратко сформулируйте исходную задачу.
+Briefly state the original task.
 
-## Загруженный контекст
+## Context loaded
 
-- Прочитанные правила и документы.
+- Rules and documents that were read.
 
-## Выполнено
+## Done
 
-- Результат работы.
+- The result of the work.
 
-## Изменённые файлы
+## Files changed
 
-- Путь — назначение изменения.
+- Path — purpose of the change.
 
-## Проверки
+## Checks
 
-- Проверка — результат или причина пропуска.
+- Check — result or reason it was skipped.
 
-## Решения
+## Decisions
 
-- Ссылка на решение или «существенных решений не было».
+- A link to a decision, or "no significant decisions".
 
-## Риски и незавершённое
+## Risks and unfinished work
 
-- Открытые вопросы и блокеры.
+- Open questions and blockers.
 
-## Следующий шаг
+## Next step
 
-Один первый конкретный шаг для следующей сессии.
+One first concrete step for the next session.

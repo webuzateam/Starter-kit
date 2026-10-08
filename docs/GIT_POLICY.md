@@ -1,65 +1,65 @@
-# Политика Git и GitHub
+# Git and GitHub policy
 
-Статус: **ОЖИДАЕТ НАСТРОЙКИ** — параметры ниже заполняются на этапе `ПРИМЕНИТЬ` и при настройке Git.
+Status: **AWAITING SETUP** — the parameters below are filled during `APPLY` and Git setup.
 
-## Параметры проекта
+## Project parameters
 
-Машиночитаемая копия этих значений хранится в `.starter-kit/config` и используется скриптом `.starter-kit/preflight.sh`. Значения должны совпадать.
+A machine-readable copy of these values lives in `.starter-kit/config` and is used by `.starter-kit/preflight.sh`. The values must match.
 
-| Параметр | Значение | Источник |
+| Parameter | Value | Source |
 |---|---|---|
-| Видимость | не согласована | — |
-| `origin` | не согласован | — |
-| Основная ветка | `main` (рекомендация) | `ПО УМОЛЧАНИЮ` |
-| Порог крупного файла | 50 MiB | `ПО УМОЛЧАНИЮ` |
-| Hook `pre-commit` | не подключён | — |
-| Кэш, сборки, зависимости | не решено | — |
-| Commit при упавших проверках | не решено | — |
+| Visibility | not agreed | — |
+| `origin` | not agreed | — |
+| Main branch | `main` (recommended) | `DEFAULT` |
+| Large file threshold | 50 MiB | `DEFAULT` |
+| `pre-commit` hook | not enabled | — |
+| Caches, builds, dependencies | not decided | — |
+| Commit when checks fail | not decided | — |
 
-## Назначение
+## Purpose
 
-Git хранит историю проекта, а удалённый репозиторий — устойчивую копию всех значимых данных. Это резервная копия и общий источник истины, а не временное хранилище.
+Git keeps the project's history, and the remote repository keeps a durable copy of all meaningful data. It is a backup and a shared source of truth, not temporary storage.
 
-## Базовые правила
+## Core rules
 
-- Один самостоятельный проект — один репозиторий.
-- Видимость выбирает пользователь. Рекомендуется приватный репозиторий. Публичный — только по явному выбору и после проверки всей истории на секреты и персональные данные.
-- Сохраняются исходники, документы, данные, результаты и невоспроизводимые материалы.
-- Секреты исключаются всегда: по пути через `.gitignore` и по содержимому через `.starter-kit/preflight.sh`.
-- Системные метаданные (`.DS_Store`, `Thumbs.db`) не являются данными проекта.
-- Кэш, сборки и воспроизводимые зависимости исключаются только по подтверждённому решению. `.gitignore` не используется, чтобы молча прятать содержательные материалы.
-- Force push, переписывание истории, удаление веток и тегов, смена `origin` и видимости не выполняются без явного разрешения.
+- One independent project — one repository.
+- The user chooses visibility. A private repository is recommended. Public — only by explicit choice and after checking the whole history for secrets and personal data.
+- Sources, documents, data, results and non-reproducible materials are kept.
+- Secrets are always excluded: by path via `.gitignore` and by content via `.starter-kit/preflight.sh`.
+- System metadata (`.DS_Store`, `Thumbs.db`) is not project data.
+- Caches, builds and reproducible dependencies are excluded only by confirmed decision. `.gitignore` is not used to silently hide meaningful materials.
+- Force push, history rewriting, deleting branches and tags, changing `origin` or visibility are never done without explicit permission.
 
-## Первичная настройка
+## Initial setup
 
-Порядок — в `prompts/03-setup-git-github.md`. Первый commit запрещён, пока `README.md` описывает Starter Kit, а не проект. Режим без брифа и команда `ПРИМЕНИТЬ` не подтверждают владельца, имя, видимость, remote или первый push: на это нужно отдельное явное согласие.
+The order is in `prompts/03-setup-git-github.md`. The first commit is forbidden while `README.md` describes Starter Kit rather than the project. No-brief mode and `APPLY` do not confirm the owner, name, visibility, remote or first push: those need separate explicit consent.
 
-Для GitHub используется браузерная авторизация `gh auth login`. Токены и пароли в чате не запрашиваются.
+GitHub uses browser authentication via `gh auth login`. Tokens and passwords are never requested in chat.
 
-## Подготовка commit
+## Preparing a commit
 
-1. `git status` — проверить новые, изменённые и удалённые файлы.
-2. `.starter-kit/preflight.sh` — секреты, опасные имена файлов, крупные файлы. `STOP` = остановиться и показать пользователю путь и варианты; значения не выводить.
-3. Добавить все значимые изменения по принятой политике.
-4. `git diff --cached --stat` и `git diff --cached --check` — проверить состав и ошибки пробелов.
-5. Создать содержательное сообщение commit. Пустые commits не создаются.
+1. `git status` — review new, modified and deleted files.
+2. `.starter-kit/preflight.sh` — secrets, dangerous file names, large files. `STOP` = stop and show the user the path and options; never print the values.
+3. Add all meaningful changes per the agreed policy.
+4. `git diff --cached --stat` and `git diff --cached --check` — check the contents and whitespace errors.
+5. Write a meaningful commit message. Empty commits are never created.
 
-## Крупные файлы
+## Large files
 
-`preflight.sh` останавливает commit при файле от порога (по умолчанию 50 MiB). GitHub отклоняет файлы больше 100 MiB. Агент показывает путь, размер, тип и варианты: обычный Git, Git LFS, сжатие, разделение, внешнее хранилище, исключение. Ни один вариант не применяется автоматически.
+`preflight.sh` stops the commit for a file at or above the threshold (50 MiB by default). GitHub rejects files larger than 100 MiB. The agent shows the path, size, type and options: regular Git, Git LFS, compression, splitting, external storage, exclusion. No option is applied automatically.
 
 ## Push
 
-Перед push: `.starter-kit/preflight.sh --push` — проверяет ветку, `origin` и видимость по `.starter-kit/config`. Только обычный push.
+Before a push: `.starter-kit/preflight.sh --push` — checks branch, `origin` and visibility against `.starter-kit/config`. Regular push only.
 
-Автоматизация останавливается при: подозрении на секрет; нерешённом крупном файле; несовпадении ветки, `origin` или видимости; конфликте или расходящейся истории; необходимости force push; потере авторизации; отклонении push сервером.
+Automation stops on: a suspected secret; an unresolved large file; a mismatch of branch, `origin` or visibility; a conflict or diverged history; a need to force push; lost authentication; a push rejected by the server.
 
-## Если секрет попал в историю
+## If a secret got into history
 
-1. Сразу отозвать или заменить credential у поставщика — это важнее очистки истории.
-2. Сообщить пользователю путь и commit без значения.
-3. Очистку истории (`git filter-repo` и force push) выполнять только по отдельному явному решению пользователя.
+1. Revoke or rotate the credential with its provider immediately — that matters more than cleaning history.
+2. Tell the user the path and commit, without the value.
+3. Clean history (`git filter-repo` and force push) only by a separate explicit decision of the user.
 
-## Проверка результата
+## Verifying the result
 
-После push подтвердить ветку, commit, remote, успешную отправку и чистое рабочее дерево. Игнорируемые секреты остаются локально; их значения не показываются.
+After a push, confirm the branch, commit, remote, successful upload and a clean working tree. Ignored secrets stay local; their values are never shown.

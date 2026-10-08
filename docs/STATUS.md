@@ -1,43 +1,43 @@
-# Текущее состояние
+# Current status
 
-Обновлено: заполняется на этапе `ПРИМЕНИТЬ` и при каждом закрытии сессии.
+Updated: filled during `APPLY` and every time a session is closed.
 
-## Кратко
+## Summary
 
-- Настройка: **не начата**. Отправьте отдельное сообщение `START`.
-- Режим START: не выбран.
-- Уровень готовности: **НЕ ГОТОВ** (словарь уровней — в `docs/PROJECT_POLICY.md`).
+- Setup: **not started**. Send `START` as a separate message.
+- START mode: not selected.
+- Readiness level: **NOT READY** (levels are defined in `docs/PROJECT_POLICY.md`).
 
-## Текущий этап
+## Current stage
 
-Starter Kit скопирован, но ещё не настроен под конкретный проект.
+Starter Kit is copied but not yet configured for this project.
 
-## Последний завершённый шаг
+## Last completed step
 
-Структура Starter Kit на месте.
+The Starter Kit structure is in place.
 
-## Сейчас в работе
+## In progress
 
-Ожидается выбор режима первого запуска.
+Waiting for the first-run mode to be chosen.
 
-## Риски и блокеры
+## Risks and blockers
 
-- Не определены цель, границы, инструменты и проверки проекта.
-- Git ещё не настроен для этого проекта.
+- The project's goal, boundaries, tools and checks are not defined.
+- Git is not yet set up for this project.
 
-## Отложенные решения
+## Deferred decisions
 
-После `ПРИМЕНИТЬ` здесь остаются только актуальные неизвестные вопросы: что неизвестно, какое действие заблокировано, когда вернуться к вопросу.
+After `APPLY`, only current unknowns remain here: what is unknown, which action is blocked, when to revisit.
 
-## Заблокированные действия
+## Blocked actions
 
-- Обычная проектная работа — до `ПРИМЕНИТЬ`.
-- Commit, push, публикация, deploy и внешняя отправка — до соответствующих проверок и разрешений.
+- Regular project work — until `APPLY`.
+- Commit, push, publishing, deploying and external sending — until the matching checks and permissions.
 
-## Следующий шаг
+## Next step
 
-Отправить `START` и выбрать режим настройки.
+Send `START` and choose a setup mode.
 
 ## Git
 
-Заполняется после настройки Git: ветка, `origin`, видимость, последний commit.
+Filled after Git setup: branch, `origin`, visibility, last commit.
