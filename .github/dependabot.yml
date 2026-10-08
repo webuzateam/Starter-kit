@@ -4,6 +4,16 @@ updates:
     directory: /site
     schedule:
       interval: weekly
+    # Мажорные версии, которые пока не поддерживает экосистема Next.js:
+    # TypeScript 7 — typescript-eslint, ESLint 10 — плагины eslint-config-next,
+    # @types/node следует за версией Node.js из site/.nvmrc и engines.
+    ignore:
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
+      - dependency-name: eslint
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
     groups:
       next-react:
         patterns: ["next", "react", "react-dom", "eslint-config-next", "@types/react", "@types/react-dom"]
