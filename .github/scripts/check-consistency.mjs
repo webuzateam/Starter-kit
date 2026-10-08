@@ -62,7 +62,7 @@ for (const file of productFiles) {
 // 5. Пути в обратных кавычках внутри продукта существуют.
 const pathRef = /`((?:docs|prompts|logs|src|outputs|\.starter-kit|\.claude)\/[^`\s]*|AGENTS\.md|README\.md|CLAUDE\.md|\.gitignore|\.env\.example)`/g;
 // Шаблонные имена и пути, которые создаются позже или упоминаются как запрещённые.
-const isPlaceholder = (path) => /[<>*]|YYYY|NNNN|0001-правила|^logs\/actions\.md$/.test(path);
+const isPlaceholder = (path) => /[<>*]|YYYY|NNNN|0001-правила|0001-project-rules|^logs\/actions\.md$/.test(path);
 for (const file of productFiles.filter((path) => path.endsWith(".md"))) {
   for (const [, path] of read(file).matchAll(pathRef)) {
     if (isPlaceholder(path)) continue;
