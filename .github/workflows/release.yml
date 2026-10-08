@@ -14,18 +14,18 @@ jobs:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
-          node-version-file: site/.nvmrc
+          node-version: 24
       - name: Проверки
         run: |
-          node scripts/check-consistency.mjs
-          bash scripts/test-preflight.sh
+          node .github/scripts/check-consistency.mjs
+          bash .github/scripts/test-preflight.sh
       - name: Версия тега совпадает с VERSION
         run: |
-          version=$(tr -d '[:space:]' < template/.starter-kit/VERSION)
+          version=$(tr -d '[:space:]' < .starter-kit/VERSION)
           test "v$version" = "$GITHUB_REF_NAME" || { echo "Тег $GITHUB_REF_NAME не совпадает с VERSION $version"; exit 1; }
       - name: Архив шаблона
         id: build
-        run: echo "archive=$(bash scripts/build-release.sh)" >> "$GITHUB_OUTPUT"
+        run: echo "archive=$(bash .github/scripts/build-release.sh)" >> "$GITHUB_OUTPUT"
       - name: Текст релиза из CHANGELOG.md
         run: |
           version=${GITHUB_REF_NAME#v}
@@ -34,7 +34,7 @@ jobs:
             on && /^## / { exit }
             on { print }
           ' CHANGELOG.md > release-notes.md
-          printf '\n---\n\nУстановка: `npx degit webuzateam/Starter-kit/template#%s my-project` или распакуйте архив ниже в корень проекта.\n' "$GITHUB_REF_NAME" >> release-notes.md
+          printf '\n---\n\nУстановка: `npx degit webuzateam/Starter-kit#%s my-project` или распакуйте архив ниже в корень проекта.\n' "$GITHUB_REF_NAME" >> release-notes.md
       - name: GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}

@@ -1,0 +1,12 @@
+# Файлы репозитория Starter Kit, которые не нужны в проектах пользователей.
+# GitHub не включает их в архивы, из которых устанавливается kit:
+# `npx degit webuzateam/Starter-kit` и zip релиза (git archive).
+/.github            export-ignore
+/.gitattributes     export-ignore
+/.starter-kit-source export-ignore
+/LICENSE            export-ignore
+/CHANGELOG.md       export-ignore
+
+# Скрипты всегда с переводом строки LF, иначе bash в Git for Windows их не выполнит.
+*.sh                text eol=lf
+.starter-kit/hooks/* text eol=lf

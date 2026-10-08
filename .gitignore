@@ -1,25 +1,42 @@
-# Системные файлы
+# Starter Kit: базовые исключения. Секреты исключаются всегда.
+# Остальные правила добавляются только по решению пользователя во время START.
+
+# Системные файлы операционных систем
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# Зависимости и сборки сайта
-node_modules/
-site/out/
-site/.next/
-site/.wrangler/
-*.tsbuildinfo
-site/next-env.d.ts
-
-# Локальные секреты
+# Локальные переменные окружения
 .env
 .env.*
-!.env.example
-.dev.vars
+*.env
+*.env.*
 
-# Локальные настройки AI-клиентов
+# Безопасные примеры должны храниться в Git
+!.env.example
+!*.env.example
+
+# Закрытые ключи, сертификаты и хранилища ключей
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+!*.pub
+
+# Каталоги и типовые файлы учётных данных
+secrets/
+credentials/
+credentials.json
+service-account*.json
+
+# Локальные настройки AI-клиентов, которые могут содержать личные данные
 .claude/settings.local.json
 
-# Локальные архивы, не входящие в репозиторий
-/Starter-kit-site-backups/
-/dist/
+# Кэш, сборки и зависимости (node_modules/, .venv/, dist/ и т. п.)
+# добавляются здесь только по подтверждённой политике проекта.

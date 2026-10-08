@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Проверяет template/.starter-kit/preflight.sh на временных Git-репозиториях.
-# Запуск: bash scripts/test-preflight.sh
+# Проверяет .starter-kit/preflight.sh на временных Git-репозиториях.
+# Запуск: bash .github/scripts/test-preflight.sh
 set -e
 
-repo_root=$(cd "$(dirname "$0")/.." && pwd)
-preflight="$repo_root/template/.starter-kit/preflight.sh"
+repo_root=$(cd "$(dirname "$0")/../.." && pwd)
+preflight="$repo_root/.starter-kit/preflight.sh"
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
 
@@ -15,8 +15,8 @@ new_repo() {
   dir="$work/$1"
   mkdir -p "$dir/.starter-kit"
   cp "$preflight" "$dir/.starter-kit/preflight.sh"
-  cp "$repo_root/template/.starter-kit/config" "$dir/.starter-kit/config"
-  cp "$repo_root/template/.gitignore" "$dir/.gitignore"
+  cp "$repo_root/.starter-kit/config" "$dir/.starter-kit/config"
+  cp "$repo_root/.gitignore" "$dir/.gitignore"
   printf '# Test project\n' > "$dir/README.md"
   git -C "$dir" init -q -b main
   git -C "$dir" config user.email test@example.invalid
