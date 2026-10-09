@@ -2,7 +2,9 @@
 // Сверяет русскую (main) и английскую (en) версии Starter Kit: одинаковые файлы продукта,
 // версия, 13 блоков, 7 ключевых вопросов, команды и идентификаторы правил.
 // Текущая версия — рабочее дерево, другая — ветка origin/<main|en>.
-// Запуск: node .github/scripts/check-parity.mjs (нужен git fetch origin main en).
+// Запуск: node .github/scripts/check-parity.mjs [--allow-version-skew] (нужен git fetch origin main en).
+// --allow-version-skew: разная версия — только предупреждение (для PR, когда версию поднимают
+// по очереди в двух ветках). В релизе флаг не используется: там версии обязаны совпадать.
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
@@ -65,10 +67,14 @@ const metrics = (side) => {
     "команд /kit-*": here.files.filter((f) => f.startsWith(".claude/commands/")).length,
   };
 };
+const allowVersionSkew = process.argv.includes("--allow-version-skew");
 const a = metrics(here);
 const b = metrics(there);
 for (const key of Object.keys(a)) {
-  if (String(a[key]) !== String(b[key])) fail(`${key}: здесь «${a[key]}», в ${otherBranch} «${b[key]}»`);
+  if (String(a[key]) === String(b[key])) continue;
+  const message = `${key}: здесь «${a[key]}», в ${otherBranch} «${b[key]}»`;
+  if (key === "версия" && allowVersionSkew) console.warn(`  ⚠ ${message} — поднимите версию и в ${otherBranch} до релиза`);
+  else fail(message);
 }
 
 // 3. Язык версий различается.
