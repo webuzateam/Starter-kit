@@ -9,4 +9,5 @@
 - [`0001-task-protocol-and-project-observatory.md`](0001-task-protocol-and-project-observatory.md) — курс на `Task Protocol v1` и read-only Dashboard `Project Observatory`; реализация не начата.
 - [`0002-public-open-source-release.md`](0002-public-open-source-release.md) — публичный релиз: лицензия MIT, выбор видимости, `preflight.sh`, CI; структура заменена решением 0003.
 - [`0003-kit-at-repository-root.md`](0003-kit-at-repository-root.md) — Starter Kit в корне репозитория, служебное в `.github/`, сайт в отдельном приватном репозитории.
+- [`0005-automatic-edition-sync.md`](0005-automatic-edition-sync.md) — синхронизация `main` ↔ `en` и версии сайта контролируется автоматически.
 - [`0004-english-edition-and-example.md`](0004-english-edition-and-example.md) — английская версия в ветке `en`, сайт на двух языках, пример проекта на сайте.

@@ -4,6 +4,13 @@
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-10-09
+
+### Изменено
+
+- Команда закрытия сессии везде пишется заглавными — `ЗАКРЫВАЕМ СЕССИЮ`, как и остальные команды. Регистр при вводе по-прежнему не важен.
+- Синхронизация версий автоматизирована: изменение в `main` создаёт задачу на перенос в `en`, релиз не собирается, пока задачи открыты; сайт сам предлагает обновить `KIT_VERSION`.
+
 ## [1.2.0] - 2026-10-08
 
 ### Добавлено
@@ -63,7 +70,8 @@
 
 Внутренние версии: протокол START v2 с тремя режимами, 13 блоков настройки, источники данных и уровни готовности, обязательная замена README проекта, реестр расширений, автоматическое закрытие сессии, сайт-презентация и полная инструкция.
 
-[Unreleased]: https://github.com/webuzateam/Starter-kit/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/webuzateam/Starter-kit/compare/v1.2.1...HEAD
+[1.2.1]: https://github.com/webuzateam/Starter-kit/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/webuzateam/Starter-kit/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/webuzateam/Starter-kit/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/webuzateam/Starter-kit/releases/tag/v1.0.0

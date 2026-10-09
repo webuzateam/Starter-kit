@@ -28,7 +28,7 @@ jobs:
       - name: Русская и английская версии совпадают
         run: |
           git fetch --quiet origin main en
-          node .github/scripts/check-parity.mjs
+          node .github/scripts/check-parity.mjs --allow-version-skew
       - name: ShellCheck
         run: shellcheck --severity=warning .starter-kit/preflight.sh .starter-kit/hooks/pre-commit .github/scripts/*.sh
       - name: Тесты preflight.sh

@@ -1,0 +1,75 @@
+name: Edition sync
+
+# Каждое изменение файлов продукта в main создаёт задачу «перенести в en».
+# Задача закрывается PR в ветку en со словами «Closes #N» в описании.
+# Пока открыта хоть одна такая задача, release.yml не соберёт релиз.
+# Если изменение не нужно переносить (например, опечатка только в русском тексте),
+# добавьте в сообщение коммита [no-en] — задача не создаётся.
+on:
+  push:
+    branches: [main]
+  # GitHub сам закрывает задачи по «Closes #N» только при слиянии в main,
+  # поэтому для PR в en закрываем их здесь.
+  pull_request:
+    types: [closed]
+    branches: [en]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  issue:
+    name: Задача на перенос в en
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '[no-en]') }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Изменённые файлы продукта
+        id: diff
+        run: |
+          base="${{ github.event.before }}"
+          if [ "$base" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$base" 2>/dev/null; then base="HEAD~1"; fi
+          git diff --name-only "$base" "${{ github.sha }}" \
+            | grep -vE '^(\.github/|\.gitattributes$|\.starter-kit-source$|LICENSE$|CHANGELOG\.md$)' > files.txt || true
+          echo "count=$(wc -l < files.txt | tr -d ' ')" >> "$GITHUB_OUTPUT"
+      - name: Создать задачу
+        if: steps.diff.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SUBJECT: ${{ github.event.head_commit.message }}
+        run: |
+          gh label create sync-en --color D4A35A --description "Перенести изменение из main в ветку en" 2>/dev/null || true
+          subject=$(printf '%s' "$SUBJECT" | head -n 1 | cut -c1-80)
+          {
+            echo "В \`main\` изменились файлы продукта — перенесите изменение в английскую версию (ветка \`en\`)."
+            echo
+            echo "Коммит: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}"
+            echo
+            echo "**Файлы:**"
+            sed 's/^/- `/; s/$/`/' files.txt
+            echo
+            echo "**Как закрыть:** PR в ветку \`en\` с переводом этих изменений и строкой \`Closes #<номер этой задачи>\`. Если для английской версии ничего менять не нужно — закройте задачу с комментарием почему."
+            echo
+            echo "Пока задача открыта, релиз не собирается (\`release.yml\`)."
+          } > body.md
+          gh issue create --title "Перенести в en: $subject" --label sync-en --body-file body.md
+
+  close:
+    name: Закрыть задачи, перенесённые в en
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.merged }}
+    steps:
+      - name: Закрыть задачи из «Closes #N»
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BODY: ${{ github.event.pull_request.body }}
+          TITLE: ${{ github.event.pull_request.title }}
+          PR: ${{ github.event.pull_request.html_url }}
+        run: |
+          numbers=$(printf '%s\n%s' "$TITLE" "$BODY" | grep -oiE '(close[sd]?|fix(e[sd])?|resolve[sd]?) #[0-9]+' | grep -oE '[0-9]+' | sort -u)
+          for n in $numbers; do
+            gh issue close "$n" --repo "$GITHUB_REPOSITORY" --comment "Перенесено в en: $PR" || true
+          done
