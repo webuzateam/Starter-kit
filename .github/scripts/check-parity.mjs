@@ -86,4 +86,5 @@ if (errors.length) {
   for (const error of errors) console.error(`  ✖ ${error}`);
   process.exit(1);
 }
-console.log(`Версии ${language} и ${otherLanguage} совпадают: ${a["версия"]}, файлов продукта — ${here.files.length}.`);
+const versionNote = a["версия"] === b["версия"] ? a["версия"] : `${a["версия"]} / ${b["версия"]} (версию ещё нужно выровнять)`;
+console.log(`Версии ${language} и ${otherLanguage} совпадают по структуре: ${versionNote}, файлов продукта — ${here.files.length}.`);
