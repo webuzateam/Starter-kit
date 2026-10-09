@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  issues: read
 
 jobs:
   release:
@@ -25,6 +26,16 @@ jobs:
           node .github/scripts/check-consistency.mjs
           node .github/scripts/check-parity.mjs
           bash .github/scripts/test-preflight.sh
+      - name: Нет незакрытых задач переноса в en
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          open=$(gh issue list --repo "$GITHUB_REPOSITORY" --label sync-en --state open --json number,title --jq '.[] | "#\(.number) \(.title)"')
+          if [ -n "$open" ]; then
+            echo "Изменения main не перенесены в en. Закройте задачи перед релизом:"
+            echo "$open"
+            exit 1
+          fi
       - name: Версии тега, main и en совпадают
         run: |
           version=$(tr -d '[:space:]' < .starter-kit/VERSION)
