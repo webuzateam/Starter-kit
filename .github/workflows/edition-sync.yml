@@ -8,6 +8,11 @@ name: Edition sync
 on:
   push:
     branches: [main]
+  # GitHub сам закрывает задачи по «Closes #N» только при слиянии в main,
+  # поэтому для PR в en закрываем их здесь.
+  pull_request:
+    types: [closed]
+    branches: [en]
 
 permissions:
   contents: read
@@ -17,7 +22,7 @@ jobs:
   issue:
     name: Задача на перенос в en
     runs-on: ubuntu-latest
-    if: ${{ !contains(github.event.head_commit.message, '[no-en]') }}
+    if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '[no-en]') }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -51,3 +56,20 @@ jobs:
             echo "Пока задача открыта, релиз не собирается (\`release.yml\`)."
           } > body.md
           gh issue create --title "Перенести в en: $subject" --label sync-en --body-file body.md
+
+  close:
+    name: Закрыть задачи, перенесённые в en
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.merged }}
+    steps:
+      - name: Закрыть задачи из «Closes #N»
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BODY: ${{ github.event.pull_request.body }}
+          TITLE: ${{ github.event.pull_request.title }}
+          PR: ${{ github.event.pull_request.html_url }}
+        run: |
+          numbers=$(printf '%s\n%s' "$TITLE" "$BODY" | grep -oiE '(close[sd]?|fix(e[sd])?|resolve[sd]?) #[0-9]+' | grep -oE '[0-9]+' | sort -u)
+          for n in $numbers; do
+            gh issue close "$n" --repo "$GITHUB_REPOSITORY" --comment "Перенесено в en: $PR" || true
+          done
